@@ -12,6 +12,7 @@ main.thm
 main.toc
 
 *.log
+.idea/
 data/*.aux
 data/*.log
 
