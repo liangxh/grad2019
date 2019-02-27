@@ -12,8 +12,9 @@
         
         情感在人们的思想表达和交流中起着重要作用\cite{Banerjee2015Detection}，比起了解该思想的细节内容，情感对应该思想的大体倾向。譬如在分析用户对新产品的评论时，从对正负性情感反馈的统计可以得知新产品是否能让大部分的客户满意，或者筛选出表示不满意的用户再进行深入分析。因此情感识别是意图分析中是非常重要的一环，而由于在互联网上，大部分情况下用户以文本表达想法，面向文本的意图识别成为了近年的最要研究课题之一。在人们面对面的交流，发言者的肢体语言，面部表情，声调变化等都有助于聆听者对所表达内容的了解，然而这些信息并不存在于文本当中，这也正是对文本进行情感识别本身的难点所在\cite{SemEval2019Task3}。
 
+        情感计算的基礎是对情感作出描述，现有的描述方式可以分成两个大类: 范畴观和维度观。范畴观即把不同情感对应到一组离散的情感标签上\cite{Alm2005Emotions}，其中具代表性的有Plutchik的情感模型\cite{Plutchik1980Emo}和Ekan的情感理論\cite{Ekman1992An}和。Plutchik的情感模型包含十种情感：憤怒，恐惧，悲傷，厭惡，期待，信任，高興，驚訝；这些情感都各自对应具有重要生存意义的行为，各种复雜的情感都是由这此基本情感构成，另外这十种情感可以分成五组对立的情感对。Ekan在十年后提出的情感理論和Plutchik的相似，但相对地少了期待和信任，是一个六类情感模型。
 
-
+        以维度观描述情感就是把情感映射到多维空間的点上，而目前维度观情感模型以二维和三维空間的为主。
         ```
 
     * 国内外研究现状
@@ -56,7 +57,6 @@ Liu, B., Web data mining: Exploring hyperlinks,2nd edition, New York: Springer,2
   volume='03',
   issue='12'
 }
-
  
 @InProceedings{SemEval2019Task3,
   author = {Chatterjee, Ankush and Narahari, Kedhar Nath and Joshi, Meghana and Agrawal, Puneet},
@@ -64,3 +64,31 @@ Liu, B., Web data mining: Exploring hyperlinks,2nd edition, New York: Springer,2
   booktitle = {Proceedings of The 13th International Workshop on Semantic Evaluation (SemEval-2019)},
   address = { Minneapolis, Minnesota}, year = {2019}
 }
+
+@inproceedings{Alm2005Emotions,
+  title={Emotions from Text: Machine Learning for Text-based Emotion Prediction},
+  author={Alm, Cecilia Ovesdotter and Dan, Roth and Sproat, Richard},
+  booktitle={Conference on Hlt/emnlp},
+  year={2005},
+}
+
+
+@article{Ekman1992An,
+  title={An argument for basic emotions},
+  author={Ekman, Paul},
+  journal={Cognition & Emotion},
+  volume={6},
+  number={3-4},
+  pages={169-200},
+  year={1992},
+}
+
+@article{Plutchik1980Emo,
+  title={Emotion: Theory, Research and Experience},
+  author={Plutchik, Robert and Kellerman, Henry},
+  journal={In Theories of emotion},
+  volume={11},
+  pages={399},
+  year={1980},
+}
+
