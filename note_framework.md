@@ -50,9 +50,7 @@
         然而一篇文章有可能同时表达了多种观点和情感，因此有另一类研究针对句子或短文本所表达的情感，即句子级别的情感识别。由于句子的文本长度较文章的短，文本内部的逻辑较简单，但相对地所包含的提示信息也较少，课题的难点与前者有所不同。
         Khan等人 \cite{khan2011sentiment} 研究了对线上评论中句子进行正负性情感识别。他们首先区分出评论中各个句子的主观性和客观性，然后针对带主观情感的句子，利用开源自然语言工具SentiWordNet获取各个单词的正负情感属性，再根据句子的词性标注和他们设计的规则计算整个句子的情感向性。他们的研究默认单词的正负情感属性在不同场景下不变，然而Li等人\cite{li2013constructing} 指出部分单词在特定场景下会有不同的情感向性，因此他们提出了一种有监督学习方法，自动学习各单词在指定领域下的情感向性，以此作为文本的特征，并应用于对产品评论的情感识别中。实验结果显示使用SentiWordNet提供的全局情感评分和针对领域评估的情感评分相比，后者的识别性能力更好，同时验证了他们的假设。
 
-        
-
-        [12], [26], [29], [30], [45], [48], [55], [61], [65]
+        在一些应用场景当中，我們希望了解發言者对某个特定对象或者它的某个特定属性的想法。譬如新手机推出市场后，廠商需要了解用戶对手机的续航能力，拍照质量，交互体验等各方面的评价，对于评论中同时谈论手机的多个方面並且好评和差评不一时，应该針对各个属性分別识別發言者所表达的感情，因此有了属性级別的情感识別。Che等人 \cite{che2015sentence} 提出一种句子压缩算法，透过对句子進行依存句法分析，过濾與目標属性的情感无关的內容。他們采用了多种语义和语法特征作为輸入，以条件随机场(Conditional random field，CRF）作为分类器。实验结果显示过濾掉不相关的文本部分后，识別性能有所提升。Wang等人 \cite{wang2016attention} 研究了对网上评论中特定实体或属性的情感识別。他們提出了一个基于注意力机制的长短期记忆网络（Long Short-Term Memory，LSTM），特点在于只以词向量作为輸入，而不采用其他傳統的語義和語法特征，另外利用注意力机制自动识別與目標相关的內容。他們实验基于国際比賽SemEval-2014任务四中的一个子任务，结果然显示他們的系统性能达到了当时的技術水平。另外经过注意力单元的輸出进行分析，验证了注意力机制能有效識別文本中與目標相关的內容。
 
         ```
 
@@ -273,4 +271,23 @@
   number={10},
   pages={1141--1157},
   year={2011}
+}
+
+@article{che2015sentence,
+  title={Sentence compression for aspect-based sentiment analysis},
+  author={Che, Wanxiang and Zhao, Yanyan and Guo, Honglei and Su, Zhong and Liu, Ting},
+  journal={IEEE/ACM transactions on audio, speech, and language processing},
+  volume={23},
+  number={12},
+  pages={2111--2124},
+  year={2015},
+  publisher={IEEE}
+}
+
+@inproceedings{wang2016attention,
+  title={Attention-based LSTM for aspect-level sentiment classification},
+  author={Wang, Yequan and Huang, Minlie and Zhao, Li and others},
+  booktitle={Proceedings of the 2016 conference on empirical methods in natural language processing},
+  pages={606--615},
+  year={2016}
 }
