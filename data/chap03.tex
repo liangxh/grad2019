@@ -1,25 +1,94 @@
 \chapter{意图识别技术}
 \label{cha:tech}
 
+\section{本章引论}
+
+根据前一章中描述的研究框架，在本章中我们将针对每一个功能介绍对应的技术实现，其中包括文本预处理、词特征提取、分类算法、集成学习。对后续实验用中使用到的技术给出相对充分的说明，同时也会相关的技术给出概要的描述，以便于其他研究者在本论文未深入探索的方向作出拓展性的研究。
+
 \section{文本预处理}
 
 pass
 
-\section{词嵌入}
+\section{特征提取}
 
 pass
 
-\section{识别模型}
+\subsection{词嵌入}
 
 pass
 
-\section{迁移学习}
+\subsection{词汇特征} % Lexical Feature 
+
+% 多元语法 n-gram
+%   统计数据集中多元语法的词频(TF)和逆文本频率(IDF)
+%   取TF-IDF最高的N个多元语法
+%   对每个条微博得出一个N维向量, 每一维分别对应一个多元语法，其值为该多元语法在该条微博中的数量乘以该多元语法在整个数据集中的IDF
+%   每条微博的向量分别进行归一化
+% 单词数量
+% 字母数量
+
+\subsection{句法特征} % Syntactic features 
+
+% 对文本中单词转换成词性(Part-of-speech, POS)标注
+% 和词汇特征中多元语法一样的计算的TF-IDF特征
+
+\subsection{语义特征} % Semantic features
+
+% 词向量平均和
+%   对文本进行分词
+%   将单词序列转换成词向量序列
+%   取词向量序列的平均和作为特征
+% 潜在语义
+%   利用潜在语义分析(Latent semantic analysis, LSA)从训练集学习单词间的隐藏概念
+%   再分别对测试集各个样本提取隐藏概念
+% 词类分布
+%   利用布朗聚类(Brown Clustering)对训练集的单词进行聚类(N类)
+%   每段文本得出一个N维向量，各维对应该文本中包含该类单词的数量
+
+\subsection{基于人工神经网络}
+
+% 人工神经网络对每一个输入进行预测的中间结果可被认为是该输入的隐藏特征
+% 利用不同标注的数据集训练的人工神经网络可以用作对应类型的特征提取，如
+%  SemEval2014 Task 9: 标注为文本的正负中性情感
+%  SemEval2018 Task 1: 标注为文本中是否分别包含了11种情感
+
+
+\section{分类算法}
 
 pass
+
+\subsection{传统机器学习方法}
+
+% 支持向量机 Support Vector Machine, SVM
+% 决策树 Decision Tree
+% 随机森林 Random Forest
+
+\subsection{深度学习方法}
+
+% Gated Recurrent Unit, GRU 
+% 长短期记忆网络 Long Short-Term Memory, LSTM
+% 双向长短期记忆网络 Bidirectional Long Short-Term Memory, BLSTM
+% 卷积神经网络 Convolutional Neural Network CNN
 
 \section{集成学习}
 
 pass
+
+% 后融合
+%   结合多个子系统的预测结果，根据特定策略得出新的预测结果
+
+%   多数投票 Majority Voting / Hard Voting
+%     每个模型分别给出预测标签
+%     取最多模型预测的标签作为最终预测结果
+
+%   加权多数投票 Weighted Majority Vote
+%     每个模型分别给出预测标签
+%     对这些模型的预测标签进行加权投票，取投票最多的标签作为预测结果
+
+%   加权平均概率投票 Soft Voting
+%     每个模型分别给出各个标签的预测概率
+%     对每个模型的预测概率进行加权不均，取概率最高的标签作为预测结果
+
 
 \section{本章小结}
 
