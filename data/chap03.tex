@@ -167,15 +167,27 @@ $c_t \in \mathbb{R}^h$提当前时刻记忆，$i_t$，$f_t$，$o_t \in \mathbb{R
   \label{fig:brnn}
 \end{figure}
 
-% 人工神经网络对每一个输入进行预测的中间结果可被认为是该输入的隐藏特征
-% 利用不同标注的数据集训练的人工神经网络可以用作对应类型的特征提取，如
-%  SemEval2014 Task 9: 标注为文本的正负中性情感
-%  SemEval2018 Task 1: 标注为文本中是否分别包含了11种情感
+\subsubsection{注意力机制}
 
-% Gated Recurrent Unit, GRU 
-% 长短期记忆网络 Long Short-Term Memory, LSTM
-% 双向长短期记忆网络 Bidirectional Long Short-Term Memory, BLSTM
-% 卷积神经网络 Convolutional Neural Network CNN
+注意力机制（Attention Mechanism）受启发于人类的视觉处理机制，当人们尝试理解一个画面的内容时，他们不会马上对画面里的所有细节都进行处理，而是首先根据需要找出相关信息所在的部位，再对该部分的内容佢进一步处理。当人们对同类型画面有一定观察后，会总结出关键信息出现的模式，并在处理新的画面时优先采用这些模式来理解其中的内容。Mnih等人\cite{mnih2014recurrent}就提出了结合递归神经网络和注意力机制来实现对手写数字的识别，不是透过预处理而是直接依赖注意力机制找出图片中数字所在的位置。其后Bahdanau等人\cite{bahdanau2014neural}同样尝试了在递归神经网络中加入注意力机制，但这次的应用场景从计算机视觉转移到了自然语言处理的机器翻译，其注意力机制的模型如下：
+
+\begin{align}
+  \label{eq:attention}
+  e_{ij} &= a(s_{i - 1}, h_j) \\
+  \alpha_{ij} &= \frac{exp(e_{ij})}{\sum\limits_{k=1}^{T_x}{exp(e_{ik})}} \\
+  c_{i} &= \sum\limits_{j=1}^{T_x}{\alpha_{ij}h_j}
+\end{align}
+
+其中$s_{i-1}$表示上一时刻（$t-1$）的隐藏状态，$h_j$表示在时刻$j$的输入信息，a是一个函数以计算$s_{i - 1}$和$h_j$关联性，$\alpha_{ij} \in (0, 1]$表示对输出时刻$i$，给予输入时刻$j$的信息的注意力，最后根据各个时刻应该给予的注意力结合所有输入信息，得出用于时刻$i$输出的浓缩信息$c_{i}$。其后Vaswani等人\cite{vaswani2017attention}则仅使用注意力机制搭建的人工神经模型在机器翻译领域达到了引人注目的性能。在近年不同类型的研究中同现了各种注意力机制的变型，但这些模型可以统一描述如下：
+
+\begin{align}
+  \alpha_{ij} &= a(q_i, k_j) \\
+  c_i &= \frac
+    {\sum\limits_{j=1}^{T_x}{\alpha_{ij}v_j}}
+    {\sum\limits_{j=1}^{T_x}{\alpha_{ij}}}
+\end{align}
+
+其中$q_i$表示输出时刻$i$对应的一个请求，$k_j$和$v_j$表示输入时刻$j$的一个键值对，a是一个数计算请求和键之间关联性，以计算对于输出时刻$i$应给予输入时刻$j$的信息$v_j$的注意力$\alpha_{ij}$，最后以加权平均计算出输出时刻$i$相关的背景信息$c_i$。一些研究\cite{wang2016attention}\cite{pontiki2014semeval}则针对其中的隐藏状态$\alpha_{ij}$分析注意力机制的具体运行，并得出了和人工理解一致的结果。
 
 \subsection{集成学习算法}
 \label{ssec:intro_ensemble_learning}
