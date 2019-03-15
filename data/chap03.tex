@@ -83,7 +83,7 @@
 
 \subsection{人工神经网络}
 
-人工神经网络源自仿生学，以数学模型模拟生物神经网络的响应过程和学习过程。Rosenblatt提出的感知器\cite{rosenblatt1958perceptron}是最早的人工神经网络，也是现在人工神经网络的基本单元（又称为神经元）。Rumelhart等人\cite{rumelhart1985learning}在后来提出了一种多层前馈神经网络，BP网络，由多层的感知器和激励函数反复堆叠而成。更重要的是他们提出了它的学习算法，反向传播算法（Backpropagation，BP），当网络的输出结果和预期结果不同，透过构造损失函数计算偏差，再根据损失函数和偏差计算出神经元权重的梯度，其对应了使误差扩大的权重方向，以其反方向作为权重修改的依据。同时将该层输入的修改量作为前一层输出的偏差，逐层重复修改权重，整个过程重复迭代直到误差满足一定条件时学习过程结束。反向传播算法是目前人工神经网络模型训练中的核心算法，但随着网络层数增加，梯度以指数级别增大或缩小，会导致梯度大小过大或近似于零的情况，即梯度爆炸和梯度消失。直到Hinton等人\cite{hinton2006fast}提出深度信念网络和无监督逐层训练的策略，其核心思想是在每一轮训练只调整网络中一层的权重，透过固定前一层的输出作为本层的输入，避开了梯度的多次传播。如此网络逐层经过调整后，再对整个网络进行权重调重，理论上此时的梯度较小，避免了梯度爆炸的出现。这使得现在复杂人工神经网络的学习成为了可能，深度学习正式进入高速发展的阶段。接下来我们将对主流的人工神经网络单元作出介绍。
+人工神经网络源自仿生学，以数学模型模拟生物神经网络的响应过程和学习过程。Rosenblatt提出的感知器\cite{rosenblatt1958perceptron}是最早的人工神经网络，也是现在人工神经网络的基本单元（又称为神经元）。Rumelhart等人\cite{rumelhart1985learning}在后来提出了一种多层前馈神经网络，BP网络，由多层的感知器和激励函数反复堆叠而成。更重要的是他们提出了它的学习算法，反向传播算法（Backpropagation，BP），当网络的输出结果和预期结果不同，透过构造损失函数计算偏差，再根据损失函数和偏差计算出神经元权重的梯度，其对应了使误差扩大的权重方向，以其反方向作为权重修改的依据。同时将该层输入的修改量作为前一层输出的偏差，逐层重复修改权重，整个过程重复迭代直到误差满足一定条件时学习过程结束。反向传播算法是目前人工神经网络模型训练中的核心算法，但随着网络层数增加，梯度以指数级别增大或缩小，会导致梯度大小过大或近似于零的情况，即梯度爆炸和梯度消失。直到Hinton等人\cite{hinton2006fast}提出深度信念网络和无监督逐层训练的策略，其核心思想是在每一轮训练只调整网络中一层的权重，透过固定前一层的输出作为本层的输入，避开了多次传播带来梯度的指数级变化。如此网络逐层经过调整后，再对整个网络进行权重调重，理论上此时的梯度较小，避免了梯度爆炸的出现。这使得现在复杂人工神经网络的学习成为了可能，深度学习正式进入高速发展的阶段。接下来我们将对主流的人工神经网络单元作出介绍。
 
 \begin{figure}[H]
   \centering
@@ -92,6 +92,80 @@
   \label{fig:perceptron}
 \end{figure}
 
+\begin{figure}[h]
+  \centering%
+  \subcaptionbox{Lecun等人\cite{lecun1989backpropagation}的反向传播网络
+  \label{fig:lecun1989backpropagation}}
+    {\includegraphics[width=0.42\textwidth]{img/lecun1989backpropagation.png}}%
+  \hspace{4em}%
+  \subcaptionbox{Waibel等人\cite{waibel1995phoneme}的时延神经网络\label{fig:waibel1995phoneme}}
+      {\includegraphics[width=0.42\textwidth]{img/waibel1995phoneme.png}}
+  \caption{卷积神经网络模型}
+  \label{fig:cnn}
+\end{figure}
+
+\subsubsection{卷积神经网络}
+
+卷积神经网络（Convolutional Neural Network，CNN）是目前最常用于计算机视觉的一类人工神经网络，它的设计来源自生物的视觉皮层。Hubel和Wiesel\cite{hubel1959receptive}\cite{hubel1968receptive}在对猫和猴子的视觉皮层进行观察时发现其中一些神经元只对接收到的视觉画面的一个区域作出反应，该区域称为该神经元的感受域（Receptive Field）而相邻神经元的感受域会有所重叠，联合构成对整个视觉画面的接收和反应。这些神经元中再细分为两类，第一类神经元对画面中特定方向的刺激反应最强烈，另二类神经元则较前一类神经元的感受域大，但其反应对刺激在感受域中的具体位置不敏感。
+
+基于以上生物特性，Fukushima\cite{fukushima1980neocognitron}提出了神经认知机（Neocognitron），其数学模型中包含了两个关键结构，卷积层和降采样层，与前面两类神经元的功能一一对应。受启发于神经认知机，Lecun等人\cite{lecun1989backpropagation}提出了一个三层的反向传播网络，包含特征映射和降采样两种功能的元件，同样与视觉皮层中的两类神经元对应。该网络被应用于手写数字的识别，和当时同类型网络的性能相比达到了近30\%的提升，该数学模型自此成为了现今卷积神经网络的原型。
+
+虽然卷积神经网络起源于视觉处理，但其变型还应用于其他领域。如Waibel等人\cite{waibel1995phoneme}提出的时延神经网络（Time-Delay Neural Network，TDNN）比应用于计算机听觉的音素识别，其核心思想是将每一个时刻的音频特征按时间顺序堆䟙，以时间上的相邻类比视觉画面上位置的相邻。Zhang等人\cite{zhang2015character}提出了一个字符级别的卷积神经网络并应用于文本主题分类，以字符类别语音中的信号，首次将卷积神经网络用于自然语言领域。
+
+
+\subsubsection{递归神经网络}
+
+递归神经网络（Recurrent Neural Network，RNN）是另一个人工神经网络的大类，和前馈神经网络最大的区别在于递归神经网络中以某种机制实现了记忆能力来保留前一时刻的状态，因此可以对一个序列输入中前后出现的内容进行关联，换言之对序列的数据进行建模。递归神经网络会在每一时刻接受一个输入，并结合其“记忆”计算这一时刻的输出，故递归神经网络的输出是和输入序列长度相同的序列。递归神经网络的应用场景包括视频内容识别、文本翻译、股票指标预测等。较早期被提出的递归神经网络模型是Elman\cite{elman1990finding}的Elman网络，其数学模型如下：
+
+\begin{align}
+  \label{eq:elman_rnn}
+  h_t &= \sigma_h (W_h x_t + U_h h_{t-1} + b_h) \\
+  y_t &= \sigma_y (Y_y h_t + b_y)
+\end{align}
+
+其中$x_t \in \mathbb{R}^d $为$t$时刻的输入，$h_t, h_{t-1} \in \mathbb{R}^h $分别表示网络在这一时刻和上一时刻的隐藏状态，$y_t \in \mathbb{R}^y$为网络的输出，$\sigma_h$和$\sigma_y$为激活函数，$W_h \in \mathbb{R}^{h \times d}, U_h \in \mathbb{R} ^ {h \times h}, b_h \in \mathbb{R}^h, Y_h \in \mathbb{R}^{y \times h}, b_y \in \mathbb{R}^y$为模型参数。可见在模型中因为引入$h_{t-1}$作为当前时刻的输入而表现出某种记忆，上一时刻的输入$x_{t-1}$间接影响了这一轮的输出。
+
+目前常用的递归神经网络之一是Hochreiter和Schmidhuber\cite{hochreiter1997long}提出的长短时记忆模型（Long Short-Term Memory，LSTM），其数学模型如下：
+
+\begin{align}
+  \label{eq:lstm}
+  f_t &= \sigma_g(W_f x_t + U_f h_{t - 1} + b_f) \\
+  i_t &= \sigma_g(W_i x_t + U_i h_{t - 1} + b_i) \\
+  o_t &= \sigma_g(W_o x_t + U_o h_{t - 1} + b_o) \\
+  c_t &= f_t \circ c_{t-1} + i_t \circ \sigma_c (W_c x_t + U_c h_{t-1} + b_c) \\
+  h_t &= o_t \circ \sigma_h (c_t)
+\end{align}
+
+其中$x_t \in \mathbb{R}^d$ 为$t$时刻的输入，$h_t$，$h_{t-1} \in \mathbb{R}^h$分别是这一时刻和上一时刻LSTM的输出（或当LSTM作为一个人工神经网络中其中一层时称为隐藏状态），
+$c_t \in \mathbb{R}^h$提当前时刻记忆，$i_t$，$f_t$，$o_t \in \mathbb{R}^h$分别控制了
+这一时刻的输入、上一时刻记忆和上一时刻的输出在这一刻的起的作用，因此称为“输入门”、“遗忘门”、“输出门”的激活向量，$\sigma_g, \sigma_c, \sigma_h$为激活函数，特别地$\sigma_g$一般采用 $sigmoid$函数，$\sigma_c, \sigma_h$一般采用$tanh$函数，$W \in \mathbb{R} ^ {h \times d}, U \in \mathbb{R}^{h \times h}, b \in \mathbb{R} ^ {h}$为网络参数。和Elman网络比较可见，LSTM除了有$h_{t-1}$传递上一时刻的信息以外多了一个记忆单元$c$，具有更强的记忆功能。在LSTM的设计中包含了“输入门”、“遗忘门”、“输出门”和记忆单元，对序列数据有较强拟合能力，相对地对于小规模的序列数据容易出现过拟合。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{img/lstm.png}
+  \caption{长短时记忆模型，引自\cite{graves2013hybrid}}
+  \label{fig:lstm}
+\end{figure}
+
+为了解决容现出现过拟合的问题，Cho等人\cite{cho2014learning}提出了门控循环神经元（Gated Recurrent Unit, GRU）。可以认为它是LSTM的一种轻量级变型，其数学模型如下：
+
+\begin{align}
+  \label{eq:gru}
+  z_t &= \sigma_g (W_z x_t + U_z h_{t-1} + b_z) \\
+  r_t &= \sigma_g (W_r x_t + U_r h_{t-1} + g_r) \\
+  h_t &= (1 - z_t) \circ h_{t-1} + z_t \circ \sigma_h (W_h x_t + U_h (r_t \circ h_{t-1}) + b_h) 
+\end{align}
+
+可见在数学模型上GRU和LSTM非常想似，虽然GRU中省去了专门的记忆单元，但同样采用了“门”来控制当前时刻的输入和前一时刻输出的作用。GRU的模型结构要较LSTM的简单，而在同一组超参数下，GRU的模型参数要明显少于LSTM，故理论上在处理较小规模的序列数据时更有优势。
+
+从上面的数学模型中我们不难发现，时刻$t$的输出只受时刻$t$及以前的输入影响，不过在一些场景下我们会考虑时刻$t$以后的输入是会也会与时刻$t$的输出有关。譬如在文本意图识别时，英语有一种后置定语的语法，在句子中一个单词A由出现在它后面的一组单词来修饰，那么为了正确理解在时刻$t$出现的单词A，我们就需要引入时刻$t$以后的信息。为此Schuster和Paliwal\cite{schuster1997bidirectional}提出了双向递归神经网络（Bidirectional Recurrent Neural Network，BRNN），如图\ref{fig:brnn}所示，一个双向递归神经网络包含两个RNN，对于一组序列数据，分别以其原本方向和反方向输入到两个RNN中，从而获得两个方向上与$t$时刻相关的信息。根据此思想，RNN可以替换成任何具体的递归神经网络如LSTM和GRU。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{img/brnn.png}
+  \caption{双向递归神经网络，引自\cite{schuster1997bidirectional}}
+  \label{fig:brnn}
+\end{figure}
 
 % 人工神经网络对每一个输入进行预测的中间结果可被认为是该输入的隐藏特征
 % 利用不同标注的数据集训练的人工神经网络可以用作对应类型的特征提取，如
