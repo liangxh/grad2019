@@ -10,15 +10,15 @@
 国际比赛SemEval-2018的任务三\cite{van2018semeval}旨在促进英语微博中的反讽识别研究，其中包含了两个子任务。子任务一是二分类的反讽识别，需要识别微博是否有使用反讽。子任务二是四分类的反讽识别，是子任务一的拓展，除了判断微博是否包含反讽，反讽再细分成三个类别：基于相反语义的言语反讽 
 、其他言语反讽、情景反讽。本章节中我们将基于SemEval-2018的任务三进行实验，采用比赛组织者提供的训练数据和测试数据，并透过和其他参赛系统进行比较来评估我们提出的框架的性能。
 
-本章的内容安排如下。在章节\ref{sec:exp_irony_det_data}中我们首先对实验数据进行观察，分析微博文本的特性以及各个反讽类别之间的不同。在章节\ref{sec:exp_irony_det_format}中，我们会基于章节\ref{sec:global_problem_analysis}给出当前问题的形式化表示。在章节\ref{sec:exp_irony_det_framework}中，我们会基于章节\ref{sec:global_framework}的框架给出我们对当前问题的系统框架。最后在章节\ref{sec:exp_irony_det_exp}给出实验的细节，以及对实验结果进行分析。
-
-\section{数据观察}
-\label{sec:exp_irony_det_data}
-
-pass
+本章的内容安排如下。在章节\ref{sec:exp_irony_det_format}中，我们会基于章节\ref{sec:global_problem_analysis}首先给出当前问题的形式化表示。在章节\ref{sec:exp_irony_det_data}中我们再对具体实验数据进行观察，分析微博文本的特性以及各个反讽类别之间的不同。在章节\ref{sec:exp_irony_det_framework}中，我们会基于章节\ref{sec:global_framework}的框架给出我们对当前问题的系统框架。最后在章节\ref{sec:exp_irony_det_exp}给出实验的细节，以及对实验结果进行分析。
 
 \section{形式化表示}
 \label{sec:exp_irony_det_format}
+
+在本章中，我們要研究单条微博的反讽类型识別。给定一个反讽类別集合$C$，对于一个微博集合$T$，对任意一条微博$t \in T$，它属于唯一一种情感类別$c \in C$。又给定一个词集合$V$，微博$t$经过文本預处理后可以表示为一个長度为$L$的词序列 $v = <v_1, v_2, ..., v_L>, v_i \in V, i \in [1, L]$。因为沒有引入上下文信息，所以背景$B$在模型中忽略。那么我們的目标是找出一个映射关系$F_C$，使得$c=F_C(v)$。
+
+\section{数据观察}
+\label{sec:exp_irony_det_data}
 
 pass
 
