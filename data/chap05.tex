@@ -14,13 +14,51 @@
 \section{形式化表示}
 \label{sec:exp_context_emo_format}
 
-在本章中，我们要研究三轮对话的情感识别。给定一个情感类别集合$C$，对于一个三轮对话的集合$S$，其中任意一个样本$s$可以表示为一个三元组$<t^1, t^2, t^3>$对应三段文本，其中最后一轮发言$t^3$是被识別情感的主体，上下文$b=<t^1, t^2>$是$t^3$的背景信息。假设$t^3$在背景$b$下属于唯一一种情感倾向$c \in C$。又给定一个词集合$V$，对任意一輪的文本$t^j, j=1,2,3$，经过文本预处理后可以表示为一个长度为$L^j$的词序列 $v^j = <v^j_1, v^j_2, ..., v^j_{L^j}>, v^j_i \in V, i \in [1, L^j]$。那么我们的目标是找出一个映射关系$F_C$，使得$c=F_C(v^3, <v^1, v^2>)$。
+在本章中，我们要研究三轮对话的情感识别。给定一个情感类别集合$C$，对于一个三轮对话的集合$S$，其中任意一个样本$s$可以表示为一个三元组$<t^1, t^2, t^3>$对应三段文本，其中最后一轮发言$t^3$是被识别情感的主体，上下文$b=<t^1, t^2>$是$t^3$的背景信息。假设$t^3$在背景$b$下属于唯一一种情感倾向$c \in C$。又给定一个词集合$V$，对任意一轮的文本$t^j, j=1,2,3$，经过文本预处理后可以表示为一个长度为$L^j$的词序列 $v^j = <v^j_1, v^j_2, ..., v^j_{L^j}>, v^j_i \in V, i \in [1, L^j]$。那么我们的目标是找出一个映射关系$F_C$，使得$c=F_C(v^3, <v^1, v^2>)$。
 
 \section{数据观察}
 \label{sec:exp_context_emo_data}
 
-我们实验完全采用SemEval-2019的任务三比赛组织者提供的数据集，
+我们的实验完全采用SemEval-2019的任务三比赛组织者提供的数据集，其中每个样本对应一个三轮对话以及第三轮发言的情感标签，第一轮为用户甲的发言，第二轮为用户乙对第一轮的回复，第三轮为用户甲对第二轮中用户乙的回复。情感标签对应四个情感类别中的其中一种：开心、悲伤、愤怒、其他。表\ref{tab:semeval_2019_task3_data}显示数据集各类别样本数量分布，表\ref{tab:semeval_2019_task3_sample}。
 
+\begin{table}[htb]
+  \centering
+  \begin{minipage}[t]{0.8\linewidth}
+  \caption{情感识别各类别样本数量分布}
+  \label{tab:semeval_2019_task3_data}
+    \begin{tabularx}{\linewidth}{X|XXXX}
+    \toprule[1.5pt]
+    数据集 & 其他 & 开心 & 悲伤 & 愤怒 \\  
+    \hline
+    训练集 & 14948 & 4243 & 5463 & 5506 \\
+    验证集 & 2338 & 142 & 125 & 150 \\
+    测试集 & 4677 & 284 & 250 & 298 \\
+    \bottomrule[1.5pt]
+    \end{tabularx}
+  \end{minipage}
+\end{table}
+
+\begin{table}[htb]
+  \centering
+  \begin{minipage}[t]{\linewidth}
+  \caption{情感识别各类别样例}
+  \label{tab:semeval_2019_task3_sample}
+    \begin{tabularx}{\linewidth}{l|XXX}
+    \toprule[1.5pt]
+    \small 情感类别 & 第一轮 & 第二轮 & 第三轮 \\
+    \hline
+    \small 开心 & live in uttra khand & ohh nice! love that place!∧.∧ & :):) \\
+    \small 悲伤 & Not coz of you & why? Tell me & :( My girlfriend left me \\
+    \small 愤怒 & He is over me & so YOU say & I just hate him \\  
+    \small 其他 & degreee & what degree \& where? & sryyy i really got to goo\\
+    \bottomrule[1.5pt]
+    \end{tabularx}
+  \end{minipage}
+\end{table}
+
+可见在訓練集上四个类別的样本分布约为3:1:1:1 ，而在验证集和测试集上四个类別的样本分布约为22:1:1:1 。在测试集上“其他”一类的样本远高于其他三个类別，和訓練集相比其样本比例也相对較高，而另外三个类別的样本数量则大致相同。
+
+另外在官方的最终测试阶段，训练集和验证集均已公佈情感标注並且可用于模型训练，因此我们在模型训练時结合了这个两个数据集，而在后续内容我们以训练集代表这个结合后的数据集。
 
 \section{框架设计}
 \label{sec:exp_context_emo_framework}
