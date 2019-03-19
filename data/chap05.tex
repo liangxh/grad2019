@@ -56,9 +56,39 @@
   \end{minipage}
 \end{table}
 
-可见在訓練集上四个类別的样本分布约为3:1:1:1 ，而在验证集和测试集上四个类別的样本分布约为22:1:1:1 。在测试集上“其他”一类的样本远高于其他三个类別，和訓練集相比其样本比例也相对較高，而另外三个类別的样本数量则大致相同。
+可见在训练集上四个类别的样本分布约为3:1:1:1 ，而在验证集和测试集上四个类别的样本分布约为22:1:1:1 。在测试集上“其他”一类的样本远高于其他三个类别，和训练集相比其样本比例也相对较高，而另外三个类别的样本数量则大致相同。
 
-另外在官方的最终测试阶段，训练集和验证集均已公佈情感标注並且可用于模型训练，因此我们在模型训练時结合了这个两个数据集，而在后续内容我们以训练集代表这个结合后的数据集。
+另外在官方的最终测试阶段，训练集和验证集均已公布情感标注并且可用于模型训练，因此我们在模型训练时结合了这个两个数据集，而在后续内容我们以训练集代表这个结合后的数据集。
+
+\subsection{文本长度}
+
+我们首先对数据集的文本经过简单分词后统计各个类别的样本中词数量的分布，以下简称为文本长度。表\ref{fig:context_emo_train_class_len}显示在训练集上各情感类别的样本在每轮发言的文本长度分布，可以看出在每一轮的发言中，不同类别样本的文本长度分布大致相同。虽然第一轮和第三轮的样本中最长的文本分别达到146个词和74个词，各轮样本的文本长度大部分在22个词以内，约为第\ref{cha:exp_irony_det}章中样本长度的一半。
+
+\begin{figure}[h]
+  \centering%
+
+  \begin{minipage}{\linewidth}
+
+  \subcaptionbox{第一轮\label{fig:context_emo_train_class_len_0}} %[3cm] 
+    {\includegraphics[height=8cm]{img/semeval2019_task3_train_0_class_len.png}}%
+  %\hspace{em}%
+  \subcaptionbox{第二轮\label{fig:context_emo_train_class_len_1}}
+      {\includegraphics[height=8cm]{img/semeval2019_task3_train_1_class_len.png}}
+
+  \end{minipage}
+  \vspace{0.5cm} 
+
+  \subcaptionbox{第三轮\label{fig:context_emo_train_class_len_2}}
+      {\includegraphics[height=8cm]{img/semeval2019_task3_train_2_class_len.png}}
+
+  \caption{训练集上各情感类别的样本在每轮发言的文本长度分布}
+
+  \label{fig:context_emo_train_class_len}
+\end{figure}
+
+\subsection{各轮发言间的情感信息}
+
+
 
 \section{框架设计}
 \label{sec:exp_context_emo_framework}
