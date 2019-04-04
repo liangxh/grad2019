@@ -249,20 +249,116 @@
 
 pass
 
+\begin{table}[htb]
+  \centering
+  \begin{minipage}[t]{0.8\linewidth}
+  \caption{反讽识别子任务一子分类器性能}
+  \label{tab:exp_irony_det_A_single_result}
+    \begin{tabularx}{\linewidth}{X|cccc}
+    \toprule[1.5pt]
+    & 准确率 & 正确率 & 召回率 & F1值 \\
+    \hline
+    CNN + 最大池 & 0.6658 & 0.5548 & 0.7974 & 0.6544 \\ % A_cnn_ek_1553221371
+    CNN + 注意力机制 & 0.6008 & 0.4980 & 0.8039 & 0.6150 \\  % A_cnn_ek_1554345958
+    \hline
+    GRU & 0.6607 & 0.5542 & 0.7395 & 0.6336 \\ % A_gru_ek_1553070254
+    GRU + 注意力机制 & 0.6569 & 0.5482 & 0.7685 & 0.6399 \\ % A_gru_ek_1553074900
+    \hline
+    BiGRU & 0.6594 & 0.5534 & 0.7331 & 0.6307 \\ % A_bgru_ek_1553075855
+    BiGRU + 注意力机制 & 0.6582 & 0.5473 & 0.8006 & 0.6501 \\ % A_bgru_ek_1553068355
+    \hline
+    LSTM & 0.6390 & 0.5276 & \bf 0.8617 & 0.6545 \\ % A_lstm_ek_1553071939
+    LSTM + 注意力机制 & 0.6862 & 0.5768 & 0.7846 & 0.6640 \\ % A_lstm_ek_1553075765
+    \hline
+    BiLSTM & 0.6798 & 0.5721 & 0.7653 & 0.6547 \\ % A_blstm_ek_1553075473
+    BiLSTM + 注意力机制 & \bf 0.6888 & 0.5861 & 0.7331 & 0.6514 \\ % A_blstm_ek_1553583756
+    2层BiLSTM & 0.6709 & 0.5577 & 0.8232 & \bf 0.6649 \\ % A_nblstm_ek_1554346535
+    2层BiLSTM + 注意力机制 & \bf 0.6888 & \bf 0.5870 & 0.7267 & 0.6494 \\ % A_nblstm_ek_1554346515
+    \bottomrule[1.5pt]
+    \end{tabularx}
+  \end{minipage}
+\end{table}
 
 \begin{table}[htb]
   \centering
-  \begin{minipage}[t]{0.7\linewidth} % 如果想在表格中使用脚注，minipage是个不错的办法
+  \begin{minipage}[t]{0.8\linewidth}
+  \caption{反讽识别子任务一子分类器性能}
+  \label{tab:exp_irony_det_B0_single_result}
+    \begin{tabularx}{\linewidth}{X|cccc}
+    \toprule[1.5pt]
+    & 准确率 & 正确率 & 召回率 & F1值 \\
+    \hline
+    CNN + 最大池 & 0.8056 & 0.5834 & 0.6098 & 0.5922 \\ % Bb03_cnn_ek_1553500207
+
+    \hline
+
+
+    GRU & 0.8748 & 0.6439 & 0.5578 & 0.5719 \\ % Bb03_gru_ek_1553498587
+    \hline
+
+    BiGRU & 0.8748 & 0.6439 & 0.5578 & 0.5719 \\ % Bb03_bgru_ek_1553498459
+    \bottomrule[1.5pt]
+    \end{tabularx}
+  \end{minipage}
+\end{table}
+
+
+\begin{table}[htb]
+  \centering
+  \begin{minipage}[t]{0.8\linewidth}
+  \caption{反讽识别子任务一前五名参赛系统性能}
+  \label{tab:exp_irony_det_A_other_comp}
+    \begin{tabularx}{\linewidth}{c|X|cccc}
+    \toprule[1.5pt]
+    排名 & 队伍名称 & 准确率 & 正确率 & 召回率 & F1值 \\
+    \hline 
+    1 & THU\_NGN & \bf 0.7347 & 0.6304 & 0.8006 & \bf 0.7054 \\
+    2 & NTUA-SLP & 0.7321 & \bf 0.6535 & 0.6913 & 0.6719 \\
+    3 & WLV & 0.6429 & 0.5317 & \bf 0.8360 & 0.6500 \\
+    4 & (无) & 0.6607 & 0.5506 & 0.7878 & 0.6481 \\
+    5 & NIHRIO, NCL & 0.7015 & 0.6091 & 0.6913 & 0.6476 \\
+
+
+    \bottomrule[1.5pt]
+    \end{tabularx}
+  \end{minipage}
+\end{table}
+
+
+\begin{table}[htb]
+  \centering
+  \begin{minipage}[t]{0.7\linewidth}
   \caption{反讽识别子任务二多步决策后的识别性能}
   \label{tab:exp_irony_det_result_ensemble}
     \begin{tabularx}{\linewidth}{X|XXXX}
     \toprule[1.5pt]
     & 准确率 & 正确率 & 召回率 & F1值 \\
     \hline
-    第一轮 & 0.6837 & 0.5512 & 0.5016 & 0.5253 \\
+    第一轮 & \bf 0.6837 & \bf 0.5512 & 0.5016 & 0.5253 \\
     第二轮 & 0.6811 & 0.5464 & 0.5113 & 0.5282 \\
     第三轮 & 0.6786 & 0.5361 & 0.5498 & 0.5429 \\ 
-    第四轮 & 0.6824 & 0.5443 & 0.5531 & 0.5486 \\
+    第四轮 & 0.6824 & 0.5443 & \bf 0.5531 & \bf 0.5486 \\
+    \bottomrule[1.5pt]
+    \end{tabularx}
+  \end{minipage}
+\end{table}
+
+\begin{table}[htb]
+  \centering
+  \begin{minipage}[t]{0.8\linewidth}
+  \caption{反讽识别子任务二前五名参赛系统性能}
+  \label{tab:exp_irony_det_B_other_comp}
+    \begin{tabularx}{\linewidth}{c|X|cccc}
+    \toprule[1.5pt]
+    排名 & 队伍名称 & 准确率 & 正确率 & 召回率 & F1值 \\
+    \hline 
+    1 & (无) & \bf 0.7321 & \bf 0.5768 & 0.5044 & 0.5074 \\
+    2 & NTUA-SLP & 0.6518 & 0.4959 & 0.5124 & 0.4959 \\
+    3 & THU\_NGN & 0.6046 & 0.4860 & 0.5414 & 0.4947 \\
+    4 & (无) & 0.6033 & 0.4660 & 0.5058 & 0.4743 \\
+    5 & NIHRIO, NCL & 0.6594 & 0.5446 & 0.4475 & 0.4437 \\
+    \hline
+    & 我们的系统 & 0.6824 & 0.5443 & \bf 0.5531 & \bf 0.5486 \\
     \bottomrule[1.5pt]
     \end{tabularx}
   \end{minipage}
