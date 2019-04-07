@@ -173,7 +173,7 @@
 
 \item 将字母被故意重复的单词以“<elongated>”示意，如“Noooooooo”替换成序列“No”和“<elongated>”，表示“No”中某一个或多个字母被多次重复，但假设被重复的字符和重复的次数与反讽类型无关。
 
-\item 将数字串替换成“<num>”，将电话号码替换成“<phone>”，将日期和时间分别替换成“<date>”和“<time>”，将数字百分比替换成“<percentage>”，超链接替换成“<url>”，假戈女竹水弓
+\item 将数字串替换成“<num>”，将电话号码替换成“<phone>”，将日期和时间分别替换成“<date>”和“<time>”，将数字百分比替换成“<percentage>”，超链接替换成“<url>”
 
 \item 将由多个标点符号组成的表情符替换成对应的情感标签，如将“:)”替换成“<happy>”，将“:((”替换成“<sad>”。
 
@@ -281,7 +281,7 @@ pass
 
 \begin{table}[htb]
   \centering
-  \begin{minipage}[t]{0.8\linewidth}
+  \begin{minipage}[t]{0.9\linewidth}
   \caption{反讽识别子任务一前五名参赛系统性能}
   \label{tab:exp_irony_det_A_other_comp}
     \begin{tabularx}{\linewidth}{c|X|cccc}
@@ -294,8 +294,6 @@ pass
     4 & (无) & 0.6607 & 0.5506 & 0.7878 & 0.6481 \\
     5 & NIHRIO, NCL & 0.7015 & 0.6091 & 0.6913 & 0.6476 \\
     \hline 
-    & LSTM & 0.6390 & 0.5276 & 0.8617 & 0.6545 \\ 
-    & 2层BiLSTM + 注意力机制 & \bf 0.6888 & \bf 0.5870 & 0.7267 & 0.6494 \\ % 
     & 我们的系统 & 0.7258 & 0.6176 & 0.8103  & 0.7010 \\
     \bottomrule[1.5pt]
     \end{tabularx}
