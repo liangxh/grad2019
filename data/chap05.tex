@@ -114,11 +114,11 @@
 
 \begin{itemize}
 
-\item 首先由第一组分类器内部进行多数投票得出$Label^{A}_{MV}$作为第一轮的预测结果$Label_{I}$。
+\item 首先由第一组分类器内部进行多数投票得出$Label^{A}_{MV}$作为第一轮的预测结果$Label_{I}$。为方便阅读，以下将对一组样本的第一轮预测结果称为中间结果一。
 
-\item 第二步，由第二组分类器投票进行多数投票得出预测结果$Label^{B}_{MV}$，若超过$thr_{B}$分类器投票投给$Label^{B}_{MV}$且第一轮的预测结果$Label_{I}$为“其他”以外的三种情感类别之一，则把预测结果修改为$Label^{B}_{MV}$，否则保持不变，以此得出第二轮的预测结果$Label_{II}$。
+\item 第二步，由第二组分类器投票进行多数投票得出预测结果$Label^{B}_{MV}$，若超过$thr_{B}$分类器投票投给$Label^{B}_{MV}$且第一轮的预测结果$Label_{I}$为“其他”以外的三种情感类别之一，则把预测结果修改为$Label^{B}_{MV}$，否则保持不变，以此得出第二轮的预测结果$Label_{II}$。为方便阅读，以下将对一组样本的第二轮预测结果称为中间结果二。
 
-\item 最后步，由第三组分类器分别得出预测结果，若超过$thr_{C}$分类器投票投给“其他”且第二轮的预测结果$Label^{III}$不是“其他”，则把预测结果修改为“其他”，否则保持不变，以此得出第三轮的预测结果$Label_{III}$。
+\item 最后步，由第三组分类器分别得出预测结果，若超过$thr_{C}$分类器投票投给“其他”且第二轮的预测结果$Label^{III}$不是“其他”，则把预测结果修改为“其他”，否则保持不变，以此得出第三轮的预测结果$Label_{III}$，同时作为整个系统对该三轮对话的最终情感识别结果。
 
 \end{itemize}
 
@@ -256,20 +256,47 @@ pass
 
 \begin{table}[htb]
   \centering
-  \begin{minipage}[t]{0.7\linewidth}
+  \begin{minipage}[t]{0.6\linewidth}
   \caption{多步决策后的系统识别性能}
   \label{tab:exp_context_emo_ensemble_result}
-    \begin{tabularx}{\linewidth}{X|XXXX}
+    \begin{tabularx}{\linewidth}{X|cccc}
     \toprule[1.5pt]
     & 准确率 & 正确率 & 召回率 & F1值 \\
     \hline
-    第一轮 & 0.9278 & 0.7360 & 0.7740 & 0.7545 \\
-    第二轮 & 0.9281 & 0.7383 & \bf 0.7764 & 0.7569 \\
-    第三轮 & \bf 0.9305 & \bf 0.7553 & 0.7680 & \bf 0.7616 \\ 
+    中间结果一 & 0.9278 & 0.7360 & 0.7740 & 0.7545 \\
+    中间结果二 & 0.9281 & 0.7383 & \bf 0.7764 & 0.7569 \\
+    \hline
+    最终结果 & \bf 0.9305 & \bf 0.7553 & 0.7680 & \bf 0.7616 \\ 
     \bottomrule[1.5pt]
     \end{tabularx}
   \end{minipage}
 \end{table}
+
+\begin{table}[htb]
+  \centering
+  \begin{minipage}[t]{0.6\linewidth}
+  \caption{SemEval-2019任务三前十名参赛系统性能} % 总参赛队伍165
+  \label{tab:exp_context_emo_other_comp}
+    \begin{tabularx}{\linewidth}{c|X|c}
+    \toprule[1.5pt]
+    排名 & 队伍名称 & F1值 \\
+    \hline
+    1 & PingAn GammaLab & 0.7959 \\
+    2 & (无) & 0.7947 \\
+    3 & NELEC & 0.7765 \\
+    4 & SymantoResearch & 0.7731 \\
+    5 & ANA & 0.7709 \\
+    6 & CAiRE\_HKUST & 0.7677 \\
+    7 & SNU\_IDS & 0.7661 \\
+    8 & \bf THU\_HCSI & 0.7616 \\
+    9 & (无) & 0.7608 \\
+    10 & YUN-HPCC & 0.7588 \\
+    \bottomrule[1.5pt]
+    \end{tabularx}
+  \end{minipage}
+\end{table}
+
+
 
 \section{本章小结}
 
