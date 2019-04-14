@@ -252,40 +252,47 @@ pass
 \begin{table}[htb]
   \centering
   \begin{minipage}[t]{0.8\linewidth}
-  \caption{反讽识别子任务一子分类器性能}
+  \caption{面向“带有反讽”和“没有反讽”的二分类模型性能}
   \label{tab:exp_irony_det_A_single_result}
     \begin{tabularx}{\linewidth}{X|cccc}
     \toprule[1.5pt]
     & 准确率 & 正确率 & 召回率 & F1值 \\
     \hline
-    CNN + 最大池 & 0.6658 & 0.5548 & 0.7974 & 0.6544 \\ % A_cnn_ek_1553221371
-    CNN + 注意力机制 & 0.6008 & 0.4980 & 0.8039 & 0.6150 \\  % A_cnn_ek_1554345958
+    CNN & 0.6658 & 0.5548 & 0.7974 & 0.6544 \\ % A_cnn_ek_1553221371
+    CNN+注意力机制 & 0.6008 & 0.4980 & 0.8039 & 0.6150 \\  % A_cnn_ek_1554345958
     \hline
     GRU & 0.6607 & 0.5542 & 0.7395 & 0.6336 \\ % A_gru_ek_1553070254
-    GRU + 注意力机制 & 0.6569 & 0.5482 & 0.7685 & 0.6399 \\ % A_gru_ek_1553074900
+    GRU+注意力机制 & 0.6569 & 0.5482 & 0.7685 & 0.6399 \\ % A_gru_ek_1553074900
     \hline
     BiGRU & 0.6594 & 0.5534 & 0.7331 & 0.6307 \\ % A_bgru_ek_1553075855
-    BiGRU + 注意力机制 & 0.6582 & 0.5473 & 0.8006 & 0.6501 \\ % A_bgru_ek_1553068355
+    BiGRU+注意力机制 & 0.6582 & 0.5473 & 0.8006 & 0.6501 \\ % A_bgru_ek_1553068355
     \hline
     LSTM & 0.6390 & 0.5276 & \bf 0.8617 & 0.6545 \\ % A_lstm_ek_1553071939
-    LSTM + 注意力机制 & 0.6862 & 0.5768 & 0.7846 & 0.6640 \\ % A_lstm_ek_1553075765
+    LSTM+注意力机制 & 0.6862 & 0.5768 & 0.7846 & 0.6640 \\ % A_lstm_ek_1553075765
     \hline
     BiLSTM & 0.6798 & 0.5721 & 0.7653 & 0.6547 \\ % A_blstm_ek_1553075473
-    BiLSTM + 注意力机制 & \bf 0.6888 & 0.5861 & 0.7331 & 0.6514 \\ % A_blstm_ek_1553583756
+    BiLSTM+注意力机制 & \bf 0.6888 & 0.5861 & 0.7331 & 0.6514 \\ % A_blstm_ek_1553583756
     \hline
     2层BiLSTM & 0.6709 & 0.5577 & 0.8232 & \bf 0.6649 \\ % A_nblstm_ek_1554346535
-    2层BiLSTM + 注意力机制 & \bf 0.6888 & \bf 0.5870 & 0.7267 & 0.6494 \\ % A_nblstm_ek_1554346515
+    2层BiLSTM+注意力机制 & \bf 0.6888 & \bf 0.5870 & 0.7267 & 0.6494 \\ % A_nblstm_ek_1554346515
     \bottomrule[1.5pt]
     \end{tabularx}
   \end{minipage}
 \end{table}
 
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{img/exp_irony_det_A_single_result_bar.png}
+  \caption{面向“带有反讽”和“没有反讽”的二分类模型性能}
+  \label{fig:exp_irony_det_A_single_result_bar}
+\end{figure}
+
 \begin{table}[htb]
   \centering
-  \begin{minipage}[t]{0.9\linewidth}
-  \caption{反讽识别子任务一前五名参赛系统性能}
+  \begin{minipage}[t]{\linewidth}
+  \caption{SemEval-2019任务三子任务一参赛系统性能}
   \label{tab:exp_irony_det_A_other_comp}
-    \begin{tabularx}{\linewidth}{c|X|cccc}
+    \begin{tabularx}{\linewidth}{c|X|llll}
     \toprule[1.5pt]
     排名 & 队伍名称 & 准确率 & 正确率 & 召回率 & F1值 \\
     \hline 
@@ -296,7 +303,7 @@ pass
     5 & NIHRIO, NCL & 0.7015 (3) & 0.6091 (5) & 0.6913 (13) & 0.6476 \\
     6 & DLUTNLP-1 & 0.6276 (19) & 0.5199 (23) & 0.7974 (5) & 0.6294 \\
     7 & ELiRF-UPV & 0.6110 (23) & 0.5059 (27) & 0.8328 (3) & 0.6294 \\
-    8 & THU\_HCSI & 0.6594 (11) & 0.5550 (11) & 0.7138 (10) & 0.6245 \\
+    8 & \bf THU\_HCSI & 0.6594 (11) & 0.5550 (11) & 0.7138 (10) & 0.6245 \\
     9 & CJ & 0.6671 (8) & 0.5654 (9) & 0.6945 (12) & 0.6234 \\ 
     10 & \#NonDicevoSulSerio & 0.6786 (7) & 0.5831 (8) & 0.6656 (15) & 0.6216 \\
     \hline
@@ -304,7 +311,7 @@ pass
     \hline
     43 & INGEOTEC-IIMAS & 0.6276 (19) & \bf 0.8800 (1) & 0.0707 (37) & 0.1310 \\
     \hline 
-    & 我们的系统 & 0.7258 & 0.6176 & 0.8103 & 0.7010 \\
+    & 我们的系统 & 0.7258 (3) & 0.6176 (5) & 0.8103 (4) & 0.7010 (2) \\
     \bottomrule[1.5pt]
     \end{tabularx}
   \end{minipage}
@@ -320,26 +327,33 @@ pass
     & 准确率 & 正确率 & 召回率 & F1值 \\
     \hline
     CNN & 0.6531 & \bf 0.5090 & 0.4667 & 0.4432 \\ % B_cnn_ek_1554446864
-    CNN + 注意力机制 & 0.6186 & 0.4467 & 0.4214 & 0.4030 \\ % B_cnn_ek_1554446879
+    CNN+注意力机制 & 0.6186 & 0.4467 & 0.4214 & 0.4030 \\ % B_cnn_ek_1554446879
     \hline
     GRU & 0.6148 & 0.4437 & 0.4693 & 0.4476 \\ % B_gru_ek_1554447274
-    GRU + 注意力机制 & 0.6531 & 0.4253 & 0.4605 & 0.4370 \\ % B_gru_ek_1554447525
+    GRU+注意力机制 & 0.6531 & 0.4253 & 0.4605 & 0.4370 \\ % B_gru_ek_1554447525
     \hline
     BiGRU & \bf 0.6722 & 0.4868 & 0.4779 & \bf 0.4768 \\ % B_bgru_ek_1554447516
-    BiGRU + 注意力机制 & 0.6301 & 0.4543 & 0.4638 & 0.4497 \\ % B_bgru_ek_1554447697
+    BiGRU+注意力机制 & 0.6301 & 0.4543 & 0.4638 & 0.4497 \\ % B_bgru_ek_1554447697
     \hline
     LSTM & 0.6186 & 0.4313 & 0.4490 & 0.4307 \\ % B_lstm_ek_1554447721
-    LSTM + 注意力机制 & 0.6416 & 0.4046 & 0.4394 & 0.4148 \\ % B_lstm_ek_1554447878
+    LSTM+注意力机制 & 0.6416 & 0.4046 & 0.4394 & 0.4148 \\ % B_lstm_ek_1554447878
     \hline
     BiLSTM & 0.6582 & 0.4875 & 0.4537 & 0.4447 \\ % B_blstm_ek_1554447955
-    BiLSTM+att & 0.6352 & 0.4168 & 0.4386 & 0.4160 \\ % B_blstm_ek_1554448216
+    BiLSTM+注意力机制 & 0.6352 & 0.4168 & 0.4386 & 0.4160 \\ % B_blstm_ek_1554448216
     \hline
     2层BiLSTM & 0.6582 & 0.5068 & 0.4762 & 0.4644 \\ % B_nblstm_ek_1554448237
-    2层BiLSTM + 注意力机制 & 0.6314 & 0.4824 & \bf 0.4864 & 0.4657 \\ % B_nblstm_ek_1554448594
+    2层BiLSTM+注意力机制 & 0.6314 & 0.4824 & \bf 0.4864 & 0.4657 \\ % B_nblstm_ek_1554448594
     \bottomrule[1.5pt]
     \end{tabularx}
   \end{minipage}
 \end{table}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{img/exp_irony_det_B_single_result_bar.png}
+  \caption{面向反讽四分类的模型性能}
+  \label{fig:exp_irony_det_B_single_result_bar}
+\end{figure}
 
 \begin{table}[htb]
   \centering
@@ -351,26 +365,33 @@ pass
     & 准确率 & 正确率 & 召回率 & F1值 \\
     \hline
     CNN & 0.7991 & 0.7438 & 0.7791 & 0.7562 \\ % Bb01_cnn_ek_1554448736
-    CNN + 注意力机制 & 0.6829 & 0.6494 & 0.6909 & 0.6470 \\ % Bb01_cnn_ek_1554448788
+    CNN+注意力机制 & 0.6829 & 0.6494 & 0.6909 & 0.6470 \\ % Bb01_cnn_ek_1554448788
     \hline
     GRU & 0.8100 & \bf 0.7566 & 0.7944 & 0.7699 \\ % Bb01_gru_ek_1554448924
-    GRU + 注意力机制 & 0.7677 & 0.7196 & 0.7679 & 0.7303 \\ % Bb01_gru_ek_1554449053
+    GRU+注意力机制 & 0.7677 & 0.7196 & 0.7679 & 0.7303 \\ % Bb01_gru_ek_1554449053
     \hline
     BiGRU & 0.8085 & 0.7565 & \bf 0.7993 & 0.7705 \\ % Bb01_bgru_ek_1554449115
-    BiGRU + 注意力机制 & 0.7425 & 0.3713 & 0.5000 &  0.4261 \\ % Bb01_bgru_ek_1554449693
+    BiGRU+注意力机制 & 0.7425 & 0.3713 & 0.5000 &  0.4261 \\ % Bb01_bgru_ek_1554449693
     \hline
     LSTM & 0.8053 & 0.7525 & 0.7932 & 0.7661 \\ % Bb01_lstm_ek_1554449707
-    LSTM + 注意力机制 & \bf 0.8257 & 0.7717 & 0.7791 & \bf 0.7752 \\ % Bb01_lstm_ek_1554449864
+    LSTM+注意力机制 & \bf 0.8257 & 0.7717 & 0.7791 & \bf 0.7752 \\ % Bb01_lstm_ek_1554449864
     \hline
     BiLSTM & 0.7551 & 0.7169 & 0.7734 & 0.7236 \\ % Bb01_blstm_ek_1554449881
-    BiLSTM + 注意力机制 & 0.7174 & 0.6909 & 0.7460 & 0.6889 \\ % Bb01_blstm_ek_1554450198
+    BiLSTM+注意力机制 & 0.7174 & 0.6909 & 0.7460 & 0.6889 \\ % Bb01_blstm_ek_1554450198
     \hline
     2层BiLSTM & 0.7849 & 0.7339 & 0.7795 & 0.7465 \\ % Bb01_nblstm_ek_1554450231
-    2层BiLSTM + 注意力机制 & 0.7928 & 0.7421 & 0.7888 & 0.7554 \\ % Bb01_nblstm_ek_1554450448
+    2层BiLSTM+注意力机制 & 0.7928 & 0.7421 & 0.7888 & 0.7554 \\ % Bb01_nblstm_ek_1554450448
     \bottomrule[1.5pt]
     \end{tabularx}
   \end{minipage}
 \end{table}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{img/exp_irony_det_Bb01_single_result_bar.png}
+  \caption{面向“没有反讽”和“基于相反语义的反讽”的二分类各模型性能}
+  \label{fig:exp_irony_det_Bb01_single_result_bar}
+\end{figure}
 
 \begin{table}[htb]
   \centering
@@ -382,26 +403,33 @@ pass
     & 准确率 & 正确率 & 召回率 & F1值 \\
     \hline
     CNN & \bf 0.8656 & \bf 0.7634 & 0.6167 & 0.6473 \\ % Bb02_cnn_ek_1554450719
-    CNN + 注意力机制 & 0.8477 & 0.6865 & 0.5917 & 0.6117 \\ % Bb02_cnn_ek_1554450772
+    CNN+注意力机制 & 0.8477 & 0.6865 & 0.5917 & 0.6117 \\ % Bb02_cnn_ek_1554450772
     \hline
     GRU & 0.8495 & 0.6942 & 0.6024 & 0.6242 \\ % Bb02_gru_ek_1554450862
-    GRU + 注意力机制 & 0.8333 & 0.6708 & 0.6556 & 0.6625 \\ % Bb02_gru_ek_1554451013
+    GRU+注意力机制 & 0.8333 & 0.6708 & 0.6556 & 0.6625 \\ % Bb02_gru_ek_1554451013
     \hline
     BiGRU & 0.8423 & 0.6645 & 0.5789 & 0.5951 \\ % Bb02_bgru_ek_1554451047
-    BiGRU + 注意力机制 & 0.8423 & 0.6825 & 0.6416 & 0.6572 \\ % Bb02_bgru_ek_1554451155
+    BiGRU+注意力机制 & 0.8423 & 0.6825 & 0.6416 & 0.6572 \\ % Bb02_bgru_ek_1554451155
     \hline
     LSTM & 0.8513 & 0.7027 & 0.6372 & 0.659 \\ % Bb02_lstm_ek_1554451286
-    LSTM + 注意力机制 & 0.8387 & 0.6676 & 0.6153 & 0.6325 \\ % Bb02_lstm_ek_1554451194
+    LSTM+注意力机制 & 0.8387 & 0.6676 & 0.6153 & 0.6325 \\ % Bb02_lstm_ek_1554451194
     \hline
     BiLSTM & 0.8351 & 0.6575 & 0.6084 & 0.6243 \\ % Bb02_blstm_ek_1554451336
-    BiLSTM + 注意力机制 & 0.8369 & 0.6797 & 0.6674 & 0.6731 \\ % Bb02_blstm_ek_1554451401
+    BiLSTM+注意力机制 & 0.8369 & 0.6797 & 0.6674 & 0.6731 \\ % Bb02_blstm_ek_1554451401
     \hline
     2层BiLSTM & 0.8262 & 0.6691 & 0.6803 & 0.6743 \\ % Bb02_nblstm_ek_1554451496
-    2层BiLSTM + 注意力机制 & 0.8513 & 0.7076 & \bf 0.6806 & \bf 0.6924 \\ % Bb02_nblstm_ek_1554451575
+    2层BiLSTM+注意力机制 & 0.8513 & 0.7076 & \bf 0.6806 & \bf 0.6924 \\ % Bb02_nblstm_ek_1554451575
     \bottomrule[1.5pt]
     \end{tabularx}
   \end{minipage}
 \end{table}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{img/exp_irony_det_Bb02_single_result_bar.png}
+  \caption{面向“没有反讽”和“情景反讽”的二分类模型性能}
+  \label{fig:exp_irony_det_Bb02_single_result_bar}
+\end{figure}
 
 \begin{table}[htb]
   \centering
@@ -413,26 +441,33 @@ pass
     & 准确率 & 正确率 & 召回率 & F1值 \\
     \hline
     CNN & \bf 0.8860 & \bf 0.7123 & \bf 0.5781 & \bf 0.6016 \\ % Bb03_cnn_ek_1553500286
-    CNN + 注意力机制 & 0.7981 & 0.493 & 0.4934 & 0.4932 \\ % Bb03_cnn_ek_1554453416
+    CNN+注意力机制 & 0.7981 & 0.493 & 0.4934 & 0.4932 \\ % Bb03_cnn_ek_1554453416
     \hline
     GRU & 0.8336 & 0.5873 & 0.5836 & 0.5853 \\ % Bb03_gru_ek_1554452318
-    GRU + 注意力机制 & 0.8841 & 0.6928 & 0.5070 &  0.4848 \\ % Bb03_gru_ek_1554452300
+    GRU+注意力机制 & 0.8841 & 0.6928 & 0.5070 &  0.4848 \\ % Bb03_gru_ek_1554452300
     \hline
     BiGRU & 0.8411 & 0.5481 & 0.5317 & 0.5353 \\ % Bb03_bgru_ek_1554452373
-    BiGRU + 注意力机制 & 0.8822 & 0.4419 & 0.4989 & 0.4687 \\ % Bb03_bgru_ek_1554452659
+    BiGRU+注意力机制 & 0.8822 & 0.4419 & 0.4989 & 0.4687 \\ % Bb03_bgru_ek_1554452659
     \hline
     LSTM & 0.8486 & 0.5603 & 0.5360 & 0.5409 \\ % Bb03_lstm_ek_1554452412
-    LSTM + 注意力机制 & 0.8841 & 0.4421 & 0.5000 & 0.4692 \\ % Bb03_lstm_ek_1554452800
+    LSTM+注意力机制 & 0.8841 & 0.4421 & 0.5000 & 0.4692 \\ % Bb03_lstm_ek_1554452800
     \hline
     BiLSTM & 0.8430 & 0.5663 & 0.5468 & 0.5527 \\ % Bb03_blstm_ek_1554452497
-    BiLSTM + 注意力机制 & 0.8822 & 0.4419 & 0.4989 & 0.4687 \\ % Bb03_blstm_ek_1554452804
+    BiLSTM+注意力机制 & 0.8822 & 0.4419 & 0.4989 & 0.4687 \\ % Bb03_blstm_ek_1554452804
     \hline
     2层BiLSTM & 0.8355 & 0.5483 & 0.5356 & 0.5393 \\ % Bb03_nblstm_ek_1554452506
-    2层BiLSTM + 注意力机制 & 0.7944 & 0.4571 & 0.4633 & 0.4600 \\ % Bb03_nblstm_ek_1554452977
+    2层BiLSTM+注意力机制 & 0.7944 & 0.4571 & 0.4633 & 0.4600 \\ % Bb03_nblstm_ek_1554452977
     \bottomrule[1.5pt]
     \end{tabularx}
   \end{minipage}
 \end{table}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{img/exp_irony_det_Bb03_single_result_bar.png}
+  \caption{面向“没有反讽”和“其他反讽”的二分类模型性能}
+  \label{fig:exp_irony_det_Bb03_single_result_bar}
+\end{figure}
 
 \begin{table}[htb]
   \centering
@@ -456,15 +491,15 @@ pass
 \begin{table}[htb]
   \centering
   \begin{minipage}[t]{\linewidth}
-  \caption{反讽识别子任务二前五名参赛系统性能} % 共43个参赛系统
+  \caption{SemEval-2019任务三子任务二参赛系统性能} % 共43个参赛系统
   \label{tab:exp_irony_det_B_other_comp}
-    \begin{tabularx}{\linewidth}{c|X|cccc}
+    \begin{tabularx}{\linewidth}{c|X|llll}
     \toprule[1.5pt]
     排名 & 队伍名称 & 准确率 & 正确率 & 召回率 & F1值 \\
     \hline 
     1 & (无) & \bf 0.7321 (1) & \bf 0.5768 (1) & 0.5044 (4) & \bf 0.5074 \\
     2 & NTUA-SLP & 0.6518 (4) & 0.4959 (4) & 0.5124 (2) & 0.4959 \\
-    3 & THU\_NGN & 0.6046 (9) & 0.4860 (6) & \bf 0.5414 (1) & 0.4947 \\
+    3 & \bf THU\_NGN & 0.6046 (9) & 0.4860 (6) & \bf 0.5414 (1) & 0.4947 \\
     4 & (无) & 0.6033 (10) & 0.4660 (7) & 0.5058 (3) & 0.4743 \\
     5 & NIHRIO, NCL & 0.6594 (3) & 0.5446 (2) & 0.4475 (5) & 0.4437 \\
     6 & Random Decision Syntax Trees & 0.6327 (6) & 0.4868 (5) & 0.4388 (8) & 0.4352 \\
@@ -473,7 +508,7 @@ pass
     9 & \#NonDicevoSulSerio & 0.5446 (18) & 0.4087 (15) & 0.4410 (6) & 0.4131 \\
     10 & INGEOTEC-IIMAS & 0.6441 (5) & 0.5017 (3) & 0.3850 (15) & 0.4055 \\
     \hline
-    & 我们的系统 & 0.6824 & 0.5443 & \bf 0.5531 & \bf 0.5486 \\
+    & 我们的系统 & 0.6824 (2) & 0.5443 (3) & \bf 0.553 1(1) & \bf 0.5486 (1) \\
     \bottomrule[1.5pt]
     \end{tabularx}
   \end{minipage}
