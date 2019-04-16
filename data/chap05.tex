@@ -159,14 +159,21 @@
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=\textwidth]{img/context_emo_cls_framework.pdf}
-  \caption{三轮对话的情感识别子分类器模型框架}
-  \label{fig:context_emo_cls_framework}
+  \includegraphics[width=0.9\textwidth]{img/context_emo_system.pdf}
+  \caption{三轮对话的情感识别系统框架}
+  \label{fig:context_emo_system}
 \end{figure}
 
 其中对于每个子分类问题，我们都采用了相同的模型框架，如图\ref{fig:context_emo_cls_framework}所示，每个子分类器的输入为三轮对话对应的词序列$\{w^1, w^2, w^3\}$。根据在章节\ref{ssec:exp_context_emo_multi_turn_analyse}中的分析，我们认为三轮的发言对识别第三轮发言的情感起着不同的作用，因此三轮发言对应的词序列分别进入各自的通道。每个通道的结构相同，第一步都是把词序列转换成对应的词嵌入向量序列，作为特征编码器的输入。此处特征编码器的设计与章节\ref{sec:exp_irony_det_framework}中的相同，目的是把单轮发言对应的词向量序列转换成固定长度的特征向量，以此得出该轮发言的特征向量。为了简化，三个通道的特征编码器采用相同的模型，但考虑到每轮发言的信息中对第三轮情感有关的特征可能不同，故三组模型有各自采用不同的权重。分别得出三轮发言的特征向量后我们需要结合这些特征来预第三轮的情感类别，此处我们直接把三个向量拼接成一个向量，作为概率预测器的轮入。此处概率预测器的设计与章节\ref{sec:exp_irony_det_framework}中的相似，但实现上采用了两层的全联接层，第一层接的激活函数为线性整流函数（Rectified Linear Unit, ReLU），而第二层的激活函数依然为$Softmax$，以得出各个情感类别的概率分布。
 
 同样地，考虑到对于面向不同情感类别的子分类问题，不同模型的建模能力和识别性能可能不同，所以对于每个子分类问题，我们会分别比较各组模型和参数的性能，以求在子分类问题上达到尽可能好的效果。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{img/context_emo_cls_framework.pdf}
+  \caption{三轮对话的情感识别子分类器模型框架}
+  \label{fig:context_emo_cls_framework}
+\end{figure}
 
 \section{实验与分析}
 \label{sec:exp_context_emo_exp}
