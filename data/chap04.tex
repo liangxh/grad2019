@@ -266,7 +266,7 @@
 
 \subsection{结果与分析}
 
-\subsubsection{面向“带有反讽”和“没有反讽”二分类的实验结果分析}
+\subsubsection{面向“带有反讽”和“没有反讽”的二分类模型性能分析}
 
 对面向“带有反讽”和“没有反讽”的二分类问题，表~\ref{tab:exp_irony_det_A_single_result}和图~\ref{fig:exp_irony_det_A_single_result_bar}显示不同卷积神经网络和迭归神经网络在我们模型框架中能达到的性能。注意表中的正确率、召回率、F1值均是针对类别“带有反讽”的指标，对应比赛SemEval2018任务三子任务一关注的主要指标。
 
@@ -292,14 +292,14 @@
     BiGRU & 0.6594 (8) & 0.5534 (8) & 0.7331 (10) & 0.6307 (11) \\ % A_bgru_ek_1553075855
     BiGRU+注意力机制 & 0.6582 (9) & 0.5473 (10) & 0.8006 (4) & 0.6501 (7) \\ % A_bgru_ek_1553068355
     \hline
-    LSTM & 0.6390 (11) & 0.5276 (11) & 0.8617 (1) & 0.6545 (4) \\ % A_lstm_ek_1553071939
+    LSTM & 0.6390 (11) & 0.5276 (11) & \bf 0.8617 (1) & 0.6545 (4) \\ % A_lstm_ek_1553071939
     LSTM+注意力机制 & 0.6862 (3) & 0.5768 (3) & 0.7846 (6) & 0.6640 (2) \\ % A_lstm_ek_1553075765
     \hline
     BiLSTM & 0.6798 (4) & 0.5721 (4) & 0.7653 (8) & 0.6547 (3) \\ % A_blstm_ek_1553075473
-    BiLSTM+注意力机制 & 0.6888 (1) & 0.5861 (2) & 0.7331 (10) & 0.6514 (6) \\ % A_blstm_ek_1553583756
+    BiLSTM+注意力机制 & \bf 0.6888 (1) & 0.5861 (2) & 0.7331 (10) & 0.6514 (6) \\ % A_blstm_ek_1553583756
     \hline
-    2层BiLSTM & 0.6709 (5) & 0.5577 (5) & 0.8232 (2) & 0.6649 (1) \\ % A_nblstm_ek_1554346535
-    2层BiLSTM+注意力机制 & 0.6888 (1) & 0.5870 (1) & 0.7267 (12) & 0.6494 (8) \\ % A_nblstm_ek_1554346515
+    2层BiLSTM & 0.6709 (5) & 0.5577 (5) & 0.8232 (2) & \bf 0.6649 (1) \\ % A_nblstm_ek_1554346535
+    2层BiLSTM+注意力机制 & \bf 0.6888 (1) & \bf 0.5870 (1) & 0.7267 (12) & 0.6494 (8) \\ % A_nblstm_ek_1554346515
     \bottomrule[1.5pt]
     \end{tabularx}
   \end{minipage}
@@ -311,6 +311,195 @@
   \caption{面向“带有反讽”和“没有反讽”的二分类模型性能}
   \label{fig:exp_irony_det_A_single_result_bar}
 \end{figure}
+
+\subsubsection{面向反讽四分类的模型性能分析}
+
+对于面向反讽四分类问题，表~\ref{tab:exp_irony_det_B_result}和图~\ref{fig:exp_irony_det_B_single_result_bar}显示不同卷积神经网络和迭归神经网络在我们模型框架中能达到的性能。注意表中的正确率、召回率、F1值均是
+各类别对应指标数据的宏平均，对应比赛SemEval2018任务三子任务二关注的主要指标。
+
+对于F1值，BiGRU达到最好的数值（0.4768），其次是2层BiLSTM以及配合注意力机制的2层BiLSTM，与前者的数值偏差较大（约为0.01）。对于准确率，同样由BiGRU达到最好的数值（0.6722），其次是BiLSTM和2层BiLSTM，和前者的数值偏差也较大（约0.014）。对于正确率，CNN和2层BiLSTM的性能较好（在0.5以上），第三的BiLSTM则在0.49以下。对于召回率，2层BiLSTM配合注意力机制达到最好的0.4864 ，其次的BiGRU和BiLSTM则和前者偏差较大（约0.01）。
+
+另外，六组模型在添加注意力机制后正确率、召回率和F1值都有所下降（仅2层BiLSTM的召回率例外），而对于准确率较高的BiGRU、BiLSTM和CNN在添加注意力机制后准确率同样有所下降，可以认为添加注意力机制在此子分类问题中并不没有带来性能提升。
+
+\begin{table}[htb]
+  \centering
+  \begin{minipage}[t]{\linewidth}
+  \caption{面向反讽四分类的模型性能}
+  \label{tab:exp_irony_det_B_result}
+    \begin{tabularx}{\linewidth}{X|llll}
+    \toprule[1.5pt]
+    & 准确率 & 正确率 & 召回率 & F1值 \\
+    \hline
+    CNN & 0.6531 (4) & \bf 0.5090 (1) & 0.4667 (5) & 0.4432 (7) \\ % B_cnn_ek_1554446864
+    CNN+注意力机制 & 0.6186 (10) & 0.4467 (7) & 0.4214 (12) & 0.4030 (12) \\ % B_cnn_ek_1554446879
+    \hline
+    GRU & 0.6148 (12) & 0.4437 (8) & 0.4693 (4) & 0.4476 (5) \\ % B_gru_ek_1554447274
+    GRU+注意力机制 & 0.6531 (4) & 0.4253 (10) & 0.4605 (7) & 0.4370 (8) \\ % B_gru_ek_1554447525
+    \hline
+    BiGRU & \bf 0.6722 (1) & 0.4868 (4) & 0.4779 (2) & \bf 0.4768 (1) \\ % B_bgru_ek_1554447516
+    BiGRU+注意力机制 & 0.6301 (9) & 0.4543 (6) & 0.4638 (6) & 0.4497 (4) \\ % B_bgru_ek_1554447697
+    \hline
+    LSTM & 0.6186 (10) & 0.4313 (9) & 0.4490 (9) & 0.4307 (9) \\ % B_lstm_ek_1554447721
+    LSTM+注意力机制 & 0.6416 (6) & 0.4046 (12) & 0.4394 (10) & 0.4148 (11) \\ % B_lstm_ek_1554447878
+    \hline
+    BiLSTM & 0.6582 (2) & 0.4875 (3) & 0.4537 (8) & 0.4447 (6) \\ % B_blstm_ek_1554447955
+    BiLSTM+注意力机制 & 0.6352 (7) & 0.4168 (11) & 0.4386 (11) & 0.4160 (10) \\ % B_blstm_ek_1554448216
+    \hline
+    2层BiLSTM & 0.6582 (2) & 0.5068 (2) & 0.4762 (3) & 0.4644 (3) \\ % B_nblstm_ek_1554448237
+    2层BiLSTM+注意力机制 & 0.6314 (8) & 0.4824 (5) & \bf 0.4864 (1) & 0.4657 (2) \\ % B_nblstm_ek_1554448594
+    \bottomrule[1.5pt]
+    \end{tabularx}
+  \end{minipage}
+\end{table}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{img/exp_irony_det_B_single_result_bar.png}
+  \caption{面向反讽四分类的模型性能}
+  \label{fig:exp_irony_det_B_single_result_bar}
+\end{figure}
+
+\subsubsection{面向“没有反讽”和“基于相反语义的反讽”二分类的实验结果分析}
+
+对于面向“没有反讽”和“基于相反语义的反讽”的二分类问题，表~\ref{tab:exp_irony_det_Bb01_result}和图~\ref{fig:exp_irony_det_Bb01_single_result_bar}显示不同卷积神经网络和迭归神经网络在我们模型框架中能达到的性能。注意表中的正确率、召回率、F1值指两个类别对应指标数据的宏平均。
+
+对于F1值，LSTM配合注意力机制达到最大数值的0.7752 ，其后依次为BiGRU和GRU，和前者差距约较小（0.005)。对于准确率，同样是LSTM配合注意力机制达到最好的效果（0.8275），其后依次为GRU和BiGRU，和前者差距大（0.015）。对于正确率，还是 LSTM配合注意力机制的数值最高（0.7717），其后依次为GRU和BiGRU，和前者差距大（0.015）。对于召回率，数值最高的是BiGRU（0.7993），其次是GRU和LSTM，和前者差距均较小（约0.005）。
+
+总的来说，LSTM配合注意力机制在四项指标中的三项都达到了最好的性能，而各项指标的第二和第三基本上由GRU和BiGRU达到。由配合注意力机制的模型达到最好的性能，这一点和前面各个子分类问题的实验结果都不同，显示注意力机制可能对“基于相反语义的反讽”有相应的建模能力。另外GRU和BiGRU的性能非接近，从数学模型上看，BiGRU比单层GRU多一个把文本反向输入的GRU通道，提高了召回率的同时稍微降低了准确率和正确率，显示反向输入的GRU通道能额外捕足到“基于相反语义的反讽”相关的特征。但相对地BiLSTM在四项指标上都明显低于LSTM，我们认为其中的原因可能有两点，一是LSTM从数学模型上对“基于相反语义的反讽”的特征建模能力较差，二是BiLSTM的模型参数过多而导致对训练集的过拟合。
+
+
+\begin{table}[htb]
+  \centering
+  \begin{minipage}[t]{\linewidth}
+  \caption{面向“没有反讽”和“基于相反语义的反讽”的二分类各模型性能}
+  \label{tab:exp_irony_det_Bb01_result}
+    \begin{tabularx}{\linewidth}{X|llll}
+    \toprule[1.5pt]
+    & 准确率 & 正确率 & 召回率 & F1值 \\
+    \hline
+    CNN & 0.7991 (5) & 0.7438 (5) & 0.7791 (7) & 0.7562 (5) \\ % Bb01_cnn_ek_1554448736
+    CNN+注意力机制 & 0.6829 (12) & 0.6494 (12) & 0.6909 (12) & 0.6470 (12) \\ % Bb01_cnn_ek_1554448788
+    \hline
+    GRU & 0.8100 (2) & 0.7566 (2) & 0.7944 (2) & 0.7699 (3) \\ % Bb01_gru_ek_1554448924
+    GRU+注意力机制 & 0.7677 (9) & 0.7196 (9) & 0.7679 (10) & 0.7303 (9) \\ % Bb01_gru_ek_1554449053
+    \hline
+    BiGRU & 0.8085 (3) & 0.7565 (3) & \bf 0.7993 (1) & 0.7705 (2) \\ % Bb01_bgru_ek_1554449115
+    BiGRU+注意力机制 & 0.7755 (8) & 0.7301 (8) & 0.7831 (5) & 0.7412 (8) \\ % Bb01_bgru_ek_1555407125
+    \hline
+    LSTM & 0.8053 (4) & 0.7525 (4) & 0.7932 (3) & 0.7661 (4) \\ % Bb01_lstm_ek_1554449707
+    LSTM+注意力机制 & \bf 0.8257 (1) & \bf 0.7717 (1) & 0.7791 (7) & \bf 0.7752 (1) \\ % Bb01_lstm_ek_1554449864
+    \hline
+    BiLSTM & 0.7551 (10) & 0.7169 (10) & 0.7734 (9) & 0.7236 (10) \\ % Bb01_blstm_ek_1554449881
+    BiLSTM+注意力机制 & 0.7174 (11) & 0.6909 (11) & 0.7460 (11) & 0.6889 (11) \\ % Bb01_blstm_ek_1554450198
+    \hline
+    2层BiLSTM & 0.7849 (7) & 0.7339 (7) & 0.7795 (6) & 0.7465 (7) \\ % Bb01_nblstm_ek_1554450231
+    2层BiLSTM+注意力机制 & 0.7928 (6) & 0.7421 (6) & 0.7888 (4) & 0.7554 (6) \\ % Bb01_nblstm_ek_1554450448
+    \bottomrule[1.5pt]
+    \end{tabularx}
+  \end{minipage}
+\end{table}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{img/exp_irony_det_Bb01_single_result_bar.png}
+  \caption{面向“没有反讽”和“基于相反语义的反讽”的二分类各模型性能}
+  \label{fig:exp_irony_det_Bb01_single_result_bar}
+\end{figure}
+
+\subsubsection{面向“没有反讽”和“情景反讽”二分类的模型性能分析}
+
+对于面向“没有反讽”和“情景反讽”的二分类问题，表~\ref{tab:exp_irony_det_Bb02_result}和图~\ref{fig:exp_irony_det_Bb02_single_result_bar}显示不同卷积神经网络和迭归神经网络在我们模型框架中能达到的性能。注意表中的正确率、召回率、F1值指两个类别对应指标数据的宏平均。
+
+对于F1值和召回率，2层BiLSTM配合注意力机制在这两个指标上都达到了最好的效果（数值分别为0.6924 和 0.6806），其次是2层BiLSTM，第三是单层的BiLSTM配合注意力机制，但后两者在准确率和正确率这两项指标上都排在靠后的位置。而对于准确率和正确率，均由CNN达到最好的效果（数值分别为0.8656和 0.7634），其次是2层BiLSTM配合注意力机制，第三是单层的LSTM。
+
+整体上，2层BiLSTM配合注意力机制在四项指标上的都达到了靠前的效果，显示2层BiLSTM配合注意力机制对“情景反讽”有明显较好的建模能力。另外CNN虽然在准确率和正确率上都达到最好的性能，但由于召回率数值太低导致了F1值明显低于第一的F1值（差距约0.045），显示CNN只对部分“情景反讽”的样本有较好的识别能力，导致了召回率偏低。
+
+\begin{table}[htb]
+  \centering
+  \begin{minipage}[t]{\linewidth}
+  \caption{面向“没有反讽”和“情景反讽”的二分类模型性能}
+  \label{tab:exp_irony_det_Bb02_result}
+    \begin{tabularx}{\linewidth}{X|llll}
+    \toprule[1.5pt]
+    & 准确率 & 正确率 & 召回率 & F1值 \\
+    \hline
+    CNN & \bf 0.8656 (1) & \bf 0.7634 (1) & 0.6167 (7) & 0.6473 (7) \\ % Bb02_cnn_ek_1554450719
+    CNN+注意力机制 & 0.8477 (5) & 0.6865 (5) & 0.5917 (11) & 0.6117 (11) \\ % Bb02_cnn_ek_1554450772
+    \hline
+    GRU & 0.8495 (4) & 0.6942 (4) & 0.6024 (10) & 0.6242 (10) \\ % Bb02_gru_ek_1554450862
+    GRU+注意力机制 & 0.8333 (11) & 0.6708 (8) & 0.6556 (4) & 0.6625 (4) \\ % Bb02_gru_ek_1554451013
+    \hline
+    BiGRU & 0.8423 (6) & 0.6645 (11) & 0.5789 (12) & 0.5951 (12) \\ % Bb02_bgru_ek_1554451047
+    BiGRU+注意力机制 & 0.8423 (6) & 0.6825 (6) & 0.6416 (5) & 0.6572 (6) \\ % Bb02_bgru_ek_1554451155
+    \hline
+    LSTM & 0.8513 (2) & 0.7027 (3) & 0.6372 (6) & 0.6590 (5) \\ % Bb02_lstm_ek_1554451286
+    LSTM+注意力机制 & 0.8387 (8) & 0.6676 (10) & 0.6153 (8) & 0.6325 (8) \\ % Bb02_lstm_ek_1554451194
+    \hline
+    BiLSTM & 0.8351 (10) & 0.6575 (12) & 0.6084 (9) & 0.6243 (9) \\ % Bb02_blstm_ek_1554451336
+    BiLSTM+注意力机制 & 0.8369 (9) & 0.6797 (7) & 0.6674 (3) & 0.6731 (3) \\ % Bb02_blstm_ek_1554451401
+    \hline
+    2层BiLSTM & 0.8262 (12) & 0.6691 (9) & 0.6803 (2) & 0.6743 (2) \\ % Bb02_nblstm_ek_1554451496
+    2层BiLSTM+注意力机制 & 0.8513 (2) & 0.7076 (2) & \bf 0.6806 (1) & \bf 0.6924 (1) \\ % Bb02_nblstm_ek_1554451575
+    \bottomrule[1.5pt]
+    \end{tabularx}
+  \end{minipage}
+\end{table}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{img/exp_irony_det_Bb02_single_result_bar.png}
+  \caption{面向“没有反讽”和“情景反讽”的二分类模型性能}
+  \label{fig:exp_irony_det_Bb02_single_result_bar}
+\end{figure}
+
+\subsubsection{面向“没有反讽”和“其他反讽”二分类的模型性能分析}
+
+对于面向“没有反讽”和“其他反讽”的二分类问题，表~\ref{tab:exp_irony_det_Bb03_result}和图~\ref{fig:exp_irony_det_Bb03_single_result_bar}显示不同卷积神经网络和迭归神经网络在我们模型框架中能达到的性能。注意表中的正确率、召回率、F1值指两个类别对应指标数据的宏平均。
+
+对于F1值，性能最好的是CNN（0.6016），其次是GRU，与前者差距较大（约0.016），第三为BiLSTM，明显低于CNN的数值（差距约为0.05）。对于准确率，同样是CNN达到最高的数值（0.8860），其次是GRU配合注意力机制以及LSTM配合注意力机制，在数值上比较接近（差距仅0.002）。对于正确率，依然是CNN的性能最优（0.7123），第二是GRU配合注意力机制，但和前者差距较明显（约0.02），第三的GRU则远差于前两者（差距达0.1以上)。 对于召回率，则是GRU的效果最好（0.5836），其次是CNN，与前者差距较小（约0.005），第三的BiLSTM则和前两者差距较大（达0.03以上）。
+
+整体上，CNN在三项指标上的都达到了最好的效果，而在召回率也逼近最好的GRU，显示CNN对“其他反讽”有明显较好的建模能力。对于CNN在准确率和正确率上最佳，这和面向“没有反讽”和“情景反讽”的二分类实验结果相同，这可能有样本量分布有关，“情景反讽”和“其他反讽”的训练样本量（分别为316和205）都远少于“没有反讽”（1923），但CNN对“其他反讽”有较好的建模能力，因此在达到较好召回率的同时达到了最佳的F1值。
+
+\begin{table}[htb]
+  \centering
+  \begin{minipage}[t]{\linewidth}
+  \caption{面向“没有反讽”和“其他反讽”的二分类模型性能}
+  \label{tab:exp_irony_det_Bb03_result}
+    \begin{tabularx}{\linewidth}{X|llll}
+    \toprule[1.5pt]
+    & 准确率 & 正确率 & 召回率 & F1值 \\
+    \hline
+    CNN & \bf 0.8860 (1) & \bf 0.7123 (1) & 0.5781 (2) & \bf 0.6016 (1) \\ % Bb03_cnn_ek_1553500286
+    CNN+注意力机制 & 0.7981 (11) & 0.4930 (8) & 0.4934 (11) & 0.4932 (7) \\ % Bb03_cnn_ek_1554453416
+    \hline
+    GRU & 0.8336 (10) & 0.5873 (3) & \bf 0.5836 (1) & 0.5853 (2) \\ % Bb03_gru_ek_1554452318
+    GRU+注意力机制 & 0.8841 (2) & 0.6928 (2) & 0.5070 (7) & 0.4848 (8) \\ % Bb03_gru_ek_1554452300
+    \hline
+    BiGRU & 0.8411 (8) & 0.5481 (7) & 0.5317 (6) & 0.5353 (6) \\ % Bb03_bgru_ek_1554452373
+    BiGRU+注意力机制 & 0.8822 (4) & 0.4419 (11) & 0.4989 (9) & 0.4687 (10) \\ % Bb03_bgru_ek_1554452659
+    \hline
+    LSTM & 0.8486 (6) & 0.5603 (5) & 0.5360 (4) & 0.5409 (4) \\ % Bb03_lstm_ek_1554452412
+    LSTM+注意力机制 & 0.8841 (2) & 0.4421 (10) & 0.5000 (8) & 0.4692 (9) \\ % Bb03_lstm_ek_1554452800
+    \hline
+    BiLSTM & 0.8430 (7) & 0.5663 (4) & 0.5468 (3) & 0.5527 (3) \\ % Bb03_blstm_ek_1554452497
+    BiLSTM+注意力机制 & 0.8822 (4) & 0.4419 (11) & 0.4989 (9) & 0.4687 (10) \\ % Bb03_blstm_ek_1554452804
+    \hline
+    2层BiLSTM & 0.8355 (9) & 0.5483 (6) & 0.5356 (5) & 0.5393 (5) \\ % Bb03_nblstm_ek_1554452506
+    2层BiLSTM+注意力机制 & 0.7944 (12) & 0.4571 (9) & 0.4633 (12) & 0.4600 (12) \\ % Bb03_nblstm_ek_1554452977
+    \bottomrule[1.5pt]
+    \end{tabularx}
+  \end{minipage}
+\end{table}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{img/exp_irony_det_Bb03_single_result_bar.png}
+  \caption{面向“没有反讽”和“其他反讽”的二分类模型性能}
+  \label{fig:exp_irony_det_Bb03_single_result_bar}
+\end{figure}
+
+\subsubsection{面向“没有反讽”和“其他反讽”二分类的模型性能分析}
+
 
 \begin{table}[htb]
   \centering
@@ -342,198 +531,10 @@
   \end{minipage}
 \end{table}
 
-\subsubsection{面向反讽四分类的实验结果分析}
-
-对于面向反讽四分类问题，表~\ref{tab:exp_irony_det_B_result}和图~\ref{fig:exp_irony_det_B_single_result_bar}显示不同卷积神经网络和迭归神经网络在我们模型框架中能达到的性能。注意表中的正确率、召回率、F1值均是
-各类别对应指标数据的宏平均，对应比赛SemEval2018任务三子任务二关注的主要指标。
-
-对于F1值，BiGRU达到最好的数值（0.4768) ，其次是2层BiLSTM以及配合注意力机制的2层BiLSTM，与前者的数值偏差较大（约为0.01）。对于准确率，同样由BiGRU达到最好的数值（0.6722），其次是BiLSTM和2层BiLSTM，和前者的数值偏差也较大（约0.014）。对于正确率，CNN和2层BiLSTM的性能较好（在0.5以上），第三的BiLSTM则在0.49以下。对于召回率，2层BiLSTM配合注意力机制达到最好的0.4864 ，其次的BiGRU和BiLSTM则和前者偏差较大（约0.01）。
-
-另外，六組模型在添加注意力机制后正确率、召回率和F1值都有所下降（仅2层BiLSTM的召回率例外），而对于准确率較高的BiGRU、BiLSTM和CNN在添加注意力机制后准确率同样有所下降，可以认为添加注意力机制在此子分类问题中并不能带来性能提升。
 
 \begin{table}[htb]
   \centering
-  \begin{minipage}[t]{\linewidth}
-  \caption{面向反讽四分类的模型性能}
-  \label{tab:exp_irony_det_B_result}
-    \begin{tabularx}{\linewidth}{X|llll}
-    \toprule[1.5pt]
-    & 准确率 & 正确率 & 召回率 & F1值 \\
-    \hline
-    CNN & 0.6531 (4) & 0.5090 (1) & 0.4667 (5) & 0.4432 (7) \\ % B_cnn_ek_1554446864
-    CNN+注意力机制 & 0.6186 (10) & 0.4467 (7) & 0.4214 (12) & 0.4030 (12) \\ % B_cnn_ek_1554446879
-    \hline
-    GRU & 0.6148 (12) & 0.4437 (8) & 0.4693 (4) & 0.4476 (5) \\ % B_gru_ek_1554447274
-    GRU+注意力机制 & 0.6531 (4) & 0.4253 (10) & 0.4605 (7) & 0.4370 (8) \\ % B_gru_ek_1554447525
-    \hline
-    BiGRU & 0.6722 (1) & 0.4868 (4) & 0.4779 (2) & 0.4768 (1) \\ % B_bgru_ek_1554447516
-    BiGRU+注意力机制 & 0.6301 (9) & 0.4543 (6) & 0.4638 (6) & 0.4497 (4) \\ % B_bgru_ek_1554447697
-    \hline
-    LSTM & 0.6186 (10) & 0.4313 (9) & 0.4490 (9) & 0.4307 (9) \\ % B_lstm_ek_1554447721
-    LSTM+注意力机制 & 0.6416 (6) & 0.4046 (12) & 0.4394 (10) & 0.4148 (11) \\ % B_lstm_ek_1554447878
-    \hline
-    BiLSTM & 0.6582 (2) & 0.4875 (3) & 0.4537 (8) & 0.4447 (6) \\ % B_blstm_ek_1554447955
-    BiLSTM+注意力机制 & 0.6352 (7) & 0.4168 (11) & 0.4386 (11) & 0.4160 (10) \\ % B_blstm_ek_1554448216
-    \hline
-    2层BiLSTM & 0.6582 (2) & 0.5068 (2) & 0.4762 (3) & 0.4644 (3) \\ % B_nblstm_ek_1554448237
-    2层BiLSTM+注意力机制 & 0.6314 (8) & 0.4824 (5) & 0.4864 (1) & 0.4657 (2) \\ % B_nblstm_ek_1554448594
-    \bottomrule[1.5pt]
-    \end{tabularx}
-  \end{minipage}
-\end{table}
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=\textwidth]{img/exp_irony_det_B_single_result_bar.png}
-  \caption{面向反讽四分类的模型性能}
-  \label{fig:exp_irony_det_B_single_result_bar}
-\end{figure}
-
-\subsubsection{面向“没有反讽”和“基于相反语义的反讽”二分类的实验结果分析}
-
-对于面向“没有反讽”和“基于相反语义的反讽”的二分类问题，表~\ref{tab:exp_irony_det_Bb01_result}和图~\ref{fig:exp_irony_det_Bb01_single_result_bar}显示不同卷积神经网络和迭归神经网络在我们模型框架中能达到的性能。注意表中的正确率、召回率、F1值指两个类别对应指标数据的宏平均。
-
-对于F1值，
-对于准确率，
-对于正确率，
-对于召回率，
-
-
-\begin{table}[htb]
-  \centering
-  \begin{minipage}[t]{\linewidth}
-  \caption{面向“没有反讽”和“基于相反语义的反讽”的二分类各模型性能}
-  \label{tab:exp_irony_det_Bb01_result}
-    \begin{tabularx}{\linewidth}{X|llll}
-    \toprule[1.5pt]
-    & 准确率 & 正确率 & 召回率 & F1值 \\
-    \hline
-    CNN & 0.7991 (5) & 0.7438 (5) & 0.7791 (7) & 0.7562 (5) \\ % Bb01_cnn_ek_1554448736
-    CNN+注意力机制 & 0.6829 (12) & 0.6494 (12) & 0.6909 (12) & 0.6470 (12) \\ % Bb01_cnn_ek_1554448788
-    \hline
-    GRU & 0.8100 (2) & 0.7566 (2) & 0.7944 (2) & 0.7699 (3) \\ % Bb01_gru_ek_1554448924
-    GRU+注意力机制 & 0.7677 (9) & 0.7196 (9) & 0.7679 (10) & 0.7303 (9) \\ % Bb01_gru_ek_1554449053
-    \hline
-    BiGRU & 0.8085 (3) & 0.7565 (3) & 0.7993 (1) & 0.7705 (2) \\ % Bb01_bgru_ek_1554449115
-    BiGRU+注意力机制 & 0.7755 (8) & 0.7301 (8) & 0.7831 (5) & 0.7412 (8) \\ % Bb01_bgru_ek_1555407125
-    \hline
-    LSTM & 0.8053 (4) & 0.7525 (4) & 0.7932 (3) & 0.7661 (4) \\ % Bb01_lstm_ek_1554449707
-    LSTM+注意力机制 & 0.8257 (1) & 0.7717 (1) & 0.7791 (7) & 0.7752 (1) \\ % Bb01_lstm_ek_1554449864
-    \hline
-    BiLSTM & 0.7551 (10) & 0.7169 (10) & 0.7734 (9) & 0.7236 (10) \\ % Bb01_blstm_ek_1554449881
-    BiLSTM+注意力机制 & 0.7174 (11) & 0.6909 (11) & 0.7460 (11) & 0.6889 (11) \\ % Bb01_blstm_ek_1554450198
-    \hline
-    2层BiLSTM & 0.7849 (7) & 0.7339 (7) & 0.7795 (6) & 0.7465 (7) \\ % Bb01_nblstm_ek_1554450231
-    2层BiLSTM+注意力机制 & 0.7928 (6) & 0.7421 (6) & 0.7888 (4) & 0.7554 (6) \\ % Bb01_nblstm_ek_1554450448
-    \bottomrule[1.5pt]
-    \end{tabularx}
-  \end{minipage}
-\end{table}
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=\textwidth]{img/exp_irony_det_Bb01_single_result_bar.png}
-  \caption{面向“没有反讽”和“基于相反语义的反讽”的二分类各模型性能}
-  \label{fig:exp_irony_det_Bb01_single_result_bar}
-\end{figure}
-
-\subsubsection{面向“没有反讽”和“情景反讽”二分类的实验结果分析}
-
-对于面向“没有反讽”和“情景反讽”的二分类问题，表~\ref{tab:exp_irony_det_Bb02_result}和图~\ref{fig:exp_irony_det_Bb02_single_result_bar}显示不同卷积神经网络和迭归神经网络在我们模型框架中能达到的性能。注意表中的正确率、召回率、F1值指两个类别对应指标数据的宏平均。
-
-对于“情景反讽”的F1值和召回率，2层BiLSTM配合注意力机制在这两个指标上都达到了最好的效果，其次是2层BiLSTM，第三是单层的BiLSTM配合注意力机制。而对于准确率和“情景反讽”的正确率，均由CNN达到最好的效果，其次是2层BiLSTM配合注意力机制，第三是单层的LSTM，
-
-
-\begin{table}[htb]
-  \centering
-  \begin{minipage}[t]{\linewidth}
-  \caption{面向“没有反讽”和“情景反讽”的二分类模型性能}
-  \label{tab:exp_irony_det_Bb02_result}
-    \begin{tabularx}{\linewidth}{X|llll}
-    \toprule[1.5pt]
-    & 准确率 & 正确率 & 召回率 & F1值 \\
-    \hline
-    CNN & 0.8656 (1) & 0.7634 (1) & 0.6167 (7) & 0.6473 (7) \\ % Bb02_cnn_ek_1554450719
-    CNN+注意力机制 & 0.8477 (5) & 0.6865 (5) & 0.5917 (11) & 0.6117 (11) \\ % Bb02_cnn_ek_1554450772
-    \hline
-    GRU & 0.8495 (4) & 0.6942 (4) & 0.6024 (10) & 0.6242 (10) \\ % Bb02_gru_ek_1554450862
-    GRU+注意力机制 & 0.8333 (11) & 0.6708 (8) & 0.6556 (4) & 0.6625 (4) \\ % Bb02_gru_ek_1554451013
-    \hline
-    BiGRU & 0.8423 (6) & 0.6645 (11) & 0.5789 (12) & 0.5951 (12) \\ % Bb02_bgru_ek_1554451047
-    BiGRU+注意力机制 & 0.8423 (6) & 0.6825 (6) & 0.6416 (5) & 0.6572 (6) \\ % Bb02_bgru_ek_1554451155
-    \hline
-    LSTM & 0.8513 (2) & 0.7027 (3) & 0.6372 (6) & 0.6590 (5) \\ % Bb02_lstm_ek_1554451286
-    LSTM+注意力机制 & 0.8387 (8) & 0.6676 (10) & 0.6153 (8) & 0.6325 (8) \\ % Bb02_lstm_ek_1554451194
-    \hline
-    BiLSTM & 0.8351 (10) & 0.6575 (12) & 0.6084 (9) & 0.6243 (9) \\ % Bb02_blstm_ek_1554451336
-    BiLSTM+注意力机制 & 0.8369 (9) & 0.6797 (7) & 0.6674 (3) & 0.6731 (3) \\ % Bb02_blstm_ek_1554451401
-    \hline
-    2层BiLSTM & 0.8262 (12) & 0.6691 (9) & 0.6803 (2) & 0.6743 (2) \\ % Bb02_nblstm_ek_1554451496
-    2层BiLSTM+注意力机制 & 0.8513 (2) & 0.7076 (2) & 0.6806 (1) & 0.6924 (1) \\ % Bb02_nblstm_ek_1554451575
-    \bottomrule[1.5pt]
-    \end{tabularx}
-  \end{minipage}
-\end{table}
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=\textwidth]{img/exp_irony_det_Bb02_single_result_bar.png}
-  \caption{面向“没有反讽”和“情景反讽”的二分类模型性能}
-  \label{fig:exp_irony_det_Bb02_single_result_bar}
-\end{figure}
-
-\subsubsection{面向“没有反讽”和“其他反讽”二分类的实验结果分析}
-
-对于面向“没有反讽”和“其他反讽”的二分类问题，表~\ref{tab:exp_irony_det_Bb03_result}和图~\ref{fig:exp_irony_det_Bb03_single_result_bar}显示不同卷积神经网络和迭归神经网络在我们模型框架中能达到的性能。注意表中的正确率、召回率、F1值指两个类别对应指标数据的宏平均。
-
-对于F1值，
-对于准确率，
-对于正确率，
-对于召回率，
-
-\begin{table}[htb]
-  \centering
-  \begin{minipage}[t]{\linewidth}
-  \caption{面向“没有反讽”和“其他反讽”的二分类模型性能}
-  \label{tab:exp_irony_det_Bb03_result}
-    \begin{tabularx}{\linewidth}{X|llll}
-    \toprule[1.5pt]
-    & 准确率 & 正确率 & 召回率 & F1值 \\
-    \hline
-    CNN & 0.8860 (1) & 0.7123 (1) & 0.5781 (2) & 0.6016 (1) \\ % Bb03_cnn_ek_1553500286
-    CNN+注意力机制 & 0.7981 (11) & 0.4930 (8) & 0.4934 (11) & 0.4932 (7) \\ % Bb03_cnn_ek_1554453416
-    \hline
-    GRU & 0.8336 (10) & 0.5873 (3) & 0.5836 (1) & 0.5853 (2) \\ % Bb03_gru_ek_1554452318
-    GRU+注意力机制 & 0.8841 (2) & 0.6928 (2) & 0.5070 (7) & 0.4848 (8) \\ % Bb03_gru_ek_1554452300
-    \hline
-    BiGRU & 0.8411 (8) & 0.5481 (7) & 0.5317 (6) & 0.5353 (6) \\ % Bb03_bgru_ek_1554452373
-    BiGRU+注意力机制 & 0.8822 (4) & 0.4419 (11) & 0.4989 (9) & 0.4687 (10) \\ % Bb03_bgru_ek_1554452659
-    \hline
-    LSTM & 0.8486 (6) & 0.5603 (5) & 0.5360 (4) & 0.5409 (4) \\ % Bb03_lstm_ek_1554452412
-    LSTM+注意力机制 & 0.8841 (2) & 0.4421 (10) & 0.5000 (8) & 0.4692 (9) \\ % Bb03_lstm_ek_1554452800
-    \hline
-    BiLSTM & 0.8430 (7) & 0.5663 (4) & 0.5468 (3) & 0.5527 (3) \\ % Bb03_blstm_ek_1554452497
-    BiLSTM+注意力机制 & 0.8822 (4) & 0.4419 (11) & 0.4989 (9) & 0.4687 (10) \\ % Bb03_blstm_ek_1554452804
-    \hline
-    2层BiLSTM & 0.8355 (9) & 0.5483 (6) & 0.5356 (5) & 0.5393 (5) \\ % Bb03_nblstm_ek_1554452506
-    2层BiLSTM+注意力机制 & 0.7944 (12) & 0.4571 (9) & 0.4633 (12) & 0.4600 (12) \\ % Bb03_nblstm_ek_1554452977
-    \bottomrule[1.5pt]
-    \end{tabularx}
-  \end{minipage}
-\end{table}
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=\textwidth]{img/exp_irony_det_Bb03_single_result_bar.png}
-  \caption{面向“没有反讽”和“其他反讽”的二分类模型性能}
-  \label{fig:exp_irony_det_Bb03_single_result_bar}
-\end{figure}
-
-
-
-\begin{table}[htb]
-  \centering
-  \begin{minipage}[t]{0.6\linewidth}
+  \begin{minipage}[t]{0.8\linewidth}
   \caption{四分类反讽识别系统最终识别结果和中间结果的性能}
   \label{tab:exp_irony_det_B_ensemble_result}
     \begin{tabularx}{\linewidth}{X|cccc}
@@ -575,8 +576,6 @@
     \end{tabularx}
   \end{minipage}
 \end{table}
-
-% b03训练时需要用class_weight
 
 % \subsection{错误分析}
 
