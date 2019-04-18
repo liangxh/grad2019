@@ -266,9 +266,10 @@
 
 \subsection{结果与分析}
 
-\subsubsection{面向“带有反讽”和“没有反讽”的二分类模型性能分析}
+\subsubsection{面向“带有反讽”和“带有反讽”的二分类模型性能分析}
+\label{sssec:exp_irony_det_A_base}
 
-对面向“带有反讽”和“没有反讽”的二分类问题，表~\ref{tab:exp_irony_det_A_single_result}和图~\ref{fig:exp_irony_det_A_single_result_bar}显示不同卷积神经网络和迭归神经网络在测试集上能达到的性能。注意表中的正确率、召回率、F1值均是针对类别“带有反讽”的指标，对应比赛SemEval2018任务三子任务一关注的主要指标。
+对面向“带有反讽”和“带有反讽”的二分类问题，表~\ref{tab:exp_irony_det_A_single_result}和图~\ref{fig:exp_irony_det_A_single_result_bar}显示不同卷积神经网络和迭归神经网络在测试集上能达到的性能。注意表中的正确率、召回率、F1值均是针对类别“带有反讽”的指标，对应比赛SemEval2018任务三子任务一关注的主要指标。
 
 对于F1值，2层BiLSTM的表现最好，其次是LSTM配合注意力机制，其F1值和前者非常靠近（偏差约0.001），第三为单层的BiLSTM，其F1值和前两者则差距明显（约0.01）。对于准确率，单层BiLSTM配合注意力机制和2层BiLSTM配合注意力机制达到最好的数值0.6888 ，第三为LSTM配合注意力机制，其准确率和前两者偏差较小（约0.026）。对于正确率，2层BiLSTM配合注意力机制达到最好的数值0.5870 ，其次是单层BiLSTM配合注意力机制，与前者偏差较小（约0.001），第三的LSTM配合注意力机制则和和前两者则差距明显（约0.01）。对于召回率，单层的LSTM达到最好的0.8617 ，第二的2层BiLSTM和前者的差距明显（约0.04）。
 
@@ -277,7 +278,7 @@
 \begin{table}[htb]
   \centering
   \begin{minipage}[t]{\linewidth}
-  \caption{面向“带有反讽”和“没有反讽”的二分类模型性能}
+  \caption{面向“带有反讽”和“带有反讽”的二分类模型性能}
   \label{tab:exp_irony_det_A_single_result}
     \begin{tabularx}{\linewidth}{X|llll}
     \toprule[1.5pt]
@@ -308,11 +309,12 @@
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{img/exp_irony_det_A_single_result_bar.png}
-  \caption{面向“带有反讽”和“没有反讽”的二分类模型性能}
+  \caption{面向“带有反讽”和“带有反讽”的二分类模型性能}
   \label{fig:exp_irony_det_A_single_result_bar}
 \end{figure}
 
 \subsubsection{面向反讽四分类的模型性能分析}
+\label{sssec:exp_irony_det_B_base}
 
 对于面向反讽四分类问题，表~\ref{tab:exp_irony_det_B_result}和图~\ref{fig:exp_irony_det_B_single_result_bar}显示不同卷积神经网络和迭归神经网络在测试集上能达到的性能。注意表中的正确率、召回率、F1值均是
 各类别对应指标数据的宏平均，对应比赛SemEval2018任务三子任务二关注的主要指标。
@@ -360,13 +362,13 @@
 \end{figure}
 
 \subsubsection{面向“没有反讽”和“基于相反语义的反讽”二分类的实验结果分析}
+\label{sssec:exp_irony_det_Bb01_base}
 
 对于面向“没有反讽”和“基于相反语义的反讽”的二分类问题，表~\ref{tab:exp_irony_det_Bb01_result}和图~\ref{fig:exp_irony_det_Bb01_single_result_bar}显示不同卷积神经网络和迭归神经网络在测试集上能达到的性能。注意表中的正确率、召回率、F1值指两个类别对应指标数据的宏平均。
 
 对于F1值，LSTM配合注意力机制达到最大数值的0.7752 ，其后依次为BiGRU和GRU，和前者差距约较小（0.005)。对于准确率，同样是LSTM配合注意力机制达到最好的效果（0.8275），其后依次为GRU和BiGRU，和前者差距大（0.015）。对于正确率，还是 LSTM配合注意力机制的数值最高（0.7717），其后依次为GRU和BiGRU，和前者差距大（0.015）。对于召回率，数值最高的是BiGRU（0.7993），其次是GRU和LSTM，和前者差距均较小（约0.005）。
 
 总的来说，LSTM配合注意力机制在四项指标中的三项都达到了最好的性能，而各项指标的第二和第三基本上由GRU和BiGRU达到。由配合注意力机制的模型达到最好的性能，这一点和前面各个子分类问题的实验结果都不同，显示注意力机制可能对“基于相反语义的反讽”有相应的建模能力。另外GRU和BiGRU的性能非接近，从数学模型上看，BiGRU比单层GRU多一个把文本反向输入的GRU通道，提高了召回率的同时稍微降低了准确率和正确率，显示反向输入的GRU通道能额外捕足到“基于相反语义的反讽”相关的特征。但相对地BiLSTM在四项指标上都明显低于LSTM，我们认为其中的原因可能有两点，一是LSTM从数学模型上对“基于相反语义的反讽”的特征建模能力较差，二是BiLSTM的模型参数过多而导致对训练集的过拟合。
-
 
 \begin{table}[htb]
   \centering
@@ -407,6 +409,7 @@
 \end{figure}
 
 \subsubsection{面向“没有反讽”和“情景反讽”二分类的模型性能分析}
+\label{sssec:exp_irony_det_Bb02_base}
 
 对于面向“没有反讽”和“情景反讽”的二分类问题，表~\ref{tab:exp_irony_det_Bb02_result}和图~\ref{fig:exp_irony_det_Bb02_single_result_bar}显示不同卷积神经网络和迭归神经网络在测试集上能达到的性能。注意表中的正确率、召回率、F1值指两个类别对应指标数据的宏平均。
 
@@ -453,6 +456,7 @@
 \end{figure}
 
 \subsubsection{面向“没有反讽”和“其他反讽”二分类的模型性能分析}
+\label{sssec:exp_irony_det_Bb03_base}
 
 对于面向“没有反讽”和“其他反讽”的二分类问题，表~\ref{tab:exp_irony_det_Bb03_result}和图~\ref{fig:exp_irony_det_Bb03_single_result_bar}显示不同卷积神经网络和迭归神经网络在测试集上能达到的性能。注意表中的正确率、召回率、F1值指两个类别对应指标数据的宏平均。
 
@@ -498,13 +502,22 @@
   \label{fig:exp_irony_det_Bb03_single_result_bar}
 \end{figure}
 
-\subsubsection{面向“没有反讽”和“其他反讽”二分类的模型性能分析}
+\subsubsection{面向“没有反讽”和“带有反讽”二分类的系统性能分析}
 
+经过前面各章节的分析，我们已经对各个子分类问题中不同模型的性能有大致了解，接下来我们将基于子分类器实现反讽识别系统，并和比赛SemEval-2018任务三的参赛系统比较来评估我们系统的性能水平。
+
+首先对于SemEval-2018任务三的子任务一，即面向“没有反讽”和“带有反讽”的二分类问题，基于章节~\ref{sssec:exp_irony_det_A_base}的实验结果，我们最终选择以F1值最高的2层BiLSTM作为子分类器的模型，按照章节~\ref{ssec:exp_irony_det_model_training}训练出由9个分类器组成的分类器组，按照章节~\ref{sec:exp_irony_det_framework}，我由该分类器组的子分类器进行投票来得出一条微博的反讽类别。
+
+表~\ref{tab:exp_irony_det_A_other_comp}显示我们的系统和SemEval-2018任务三子任务一其他参赛系统在测试集上的性能。注意表中的正确率、召回率、F1值均是针对类别“带有反讽”的指标。在SemEval-2018任务三子任务一的最终测试阶段，参赛系统共43个，表中仅显示排名前10（按照F1值排名）或在某项指标排名靠前的参赛系统，其中队伍名称为THU\_HCSI对应我们当时提交的系统，排名第8。
+
+首先观察各项指标上我们系统的性能水平。对于F1值，我们系统的数值为0.7010，对应当时排名第二，略低于第一名的0.7050，显着高于当时第二名的0.6719(差距约0.03）。对于准确率，我们系统的数值为0.7256，对应当时排名第三，和第一名的差距约为0.009。对于正确率，我们系统的数值为0.6176，对应当时排名第五。对于召回率，我们系统的数值为0.8103，对应当时排名第四。总的来说我们的系统在上述四项指标上都达到了靠前的性能，对比我们提交的系统有了明显的提升。
+
+另外对比单个子分类器（即单个2层BiLSTM模型对应的分类器）和整个系统的识别性能，系统在准确率、正确率和F1值都有明显的提升，只有召回率有轻微的下降，显示采用多数投票方法有效基于多个子分类器达到更好的识别性能。
 
 \begin{table}[htb]
   \centering
   \begin{minipage}[t]{\linewidth}
-  \caption{SemEval-2018任务三子任务一参赛系统性能}
+  \caption{SemEval-2018任务三子任务一参赛系统性能} % 共43个参赛系统
   \label{tab:exp_irony_det_A_other_comp}
     \begin{tabularx}{\linewidth}{c|X|llll}
     \toprule[1.5pt]
@@ -525,36 +538,33 @@
     \hline
     43 & INGEOTEC-IIMAS & 0.6276 (19) & \bf 0.8800 (1) & 0.0707 (37) & 0.1310 \\
     \hline 
+    & 单个分类器 & 0.6709 (8) & 0.5577 (10) & 0.8232 (4) & 0.6649 (3) \\ % A_nblstm_ek_1554346535
     & 我们的系统 & 0.7258 (3) & 0.6176 (5) & 0.8103 (4) & 0.7010 (2) \\
     \bottomrule[1.5pt]
     \end{tabularx}
   \end{minipage}
 \end{table}
 
+\subsubsection{面向反讽四分类的系统性能分析}
 
-\begin{table}[htb]
-  \centering
-  \begin{minipage}[t]{0.8\linewidth}
-  \caption{四分类反讽识别系统最终识别结果和中间结果的性能}
-  \label{tab:exp_irony_det_B_ensemble_result}
-    \begin{tabularx}{\linewidth}{X|cccc}
-    \toprule[1.5pt]
-    & 准确率 & 正确率 & 召回率 & F1值 \\
-    \hline
-    中间结果I & \bf 0.6837 & \bf 0.5512 & 0.5016 & 0.5253 \\
-    中间结果II & 0.6811 & 0.5464 & 0.5113 & 0.5282 \\
-    中间结果III & 0.6786 & 0.5361 & 0.5498 & 0.5429 \\
-    \hline
-    最终结果 & 0.6824 & 0.5443 & \bf 0.5531 & \bf 0.5486 \\
-    \bottomrule[1.5pt]
-    \end{tabularx}
-  \end{minipage}
-\end{table}
+接下来我们分析面向反讽四分类的系统性能，对应SemEval-2018任务三的子任务二。按照章节~\ref{sec:exp_irony_det_framework}，我们的反讽四分类系统涉及四个子分类问题。
+
+对于和原问题相同的反讽四分类，根据章节~\ref{sssec:exp_irony_det_B_base}的实验结果，我们采用BiGRU的模型，作为第一组分类器。对于面向“没有反讽”和“基于相反语义的反讽”的二分类问题，按照章节~\ref{sssec:exp_irony_det_Bb01_base}的实验结果，我们采用LSTM配合注意力机制作为第二组分类器的模型。按照章节~\ref{sssec:exp_irony_det_Bb02_base}的实验结果，我们采用2层BiLSTM+注意力机制作为第三组分类器的模型。按照章节~\ref{sssec:exp_irony_det_Bb03_base}的实验结果，我们采用CNN作为第四组分类器的模型。按照章节~\ref{ssec:exp_irony_det_model_training}，我们基于选定的模型分别为每个分类器组训练5个分类器。最后按照章节~\ref{sec:exp_irony_det_framework}中的设计的流程，经过各个组的投票结果逐步调整预测结果，最终得出一条微博的细分反讽类别。对于系统中对第二、三、四个分类器组需要配置的与置信度相关的参数$thr_2$、$thr_3$和$thr_4$ ，我们均设置为3，即完全相信第二、三、四个分类器组中过半数的投票结果。
+
+表~\ref{tab:exp_irony_det_B_other_comp}显示我们的系统和SemEval-2018任务三子任务二其他参赛系统在测试集上的性能。注意表中的正确率、召回率、F1值均是针对各类别对应指标数据的宏平均。在SemEval-2018任务三子任务二的最终测试阶段，参赛系统共31个，表中仅显示排名前10（按照F1值排名）的参赛系统，而我们当时并未参与子任务二。
+ 
+首先观察各项指标上我们系统的性能水平。
+对于F1值，我们系统的数值为0.5499，对应当时排名第一，显着高于当时的第一名的0.5074。
+对于准确率，我们系统的数值为0.6952，对应当时准确率排名第二，和最高数值的0.7321差距较大。
+对于正确率，我们系统的数值为0.5600，对应当时正确率排名第二，和最高数值的0.5768有一定差距。
+对于召回率，我们系统的数值为0.5402，对应当时召回率排名第二，和最高数值的0.5414差距较小。
+
+总的来说我们的系统在上述四项指标上都达到了前二的性能，并在主要评价指标F1值上显着超过了当时的第一名。对比第一名的系统，我们系统的准确率和正确率都要低于前者，而召回率比它高，可以推断我们的系统成功召回了较多“带有反讽”的细分类别的样本，但同时把靠多真实标签为“没有反讽”的样本误判为“带有反讽”的细分类别。对于以较低的准确率换来较高的F1值，这与各类别的样本数量分布有关，由于“情景反讽”和“其他反讽”的样本量在测试集中占比较小而“没有反讽”的占比较大，以误判较多“没有反讽”的样本为代价召回更多“情景反讽”和“其他反讽”的样本能够明显提高最终的F1值。
 
 \begin{table}[htb]
   \centering
   \begin{minipage}[t]{\linewidth}
-  \caption{SemEval-2018任务三子任务二参赛系统性能} % 共43个参赛系统
+  \caption{SemEval-2018任务三子任务二参赛系统性能} % 共31个参赛系统
   \label{tab:exp_irony_det_B_other_comp}
     \begin{tabularx}{\linewidth}{c|X|llll}
     \toprule[1.5pt]
@@ -571,11 +581,140 @@
     9 & \#NonDicevoSulSerio & 0.5446 (18) & 0.4087 (15) & 0.4410 (6) & 0.4131 \\
     10 & INGEOTEC-IIMAS & 0.6441 (5) & 0.5017 (3) & 0.3850 (15) & 0.4055 \\
     \hline
-    & 我们的系统 & 0.6824 (2) & 0.5443 (3) & \bf 0.5531 (1) & \bf 0.5486 (1) \\
+    & 我们的系统 & 0.6939 (2) & 0.5604 (2) & 0.5370 (2) & 0.5484 (1) \\
     \bottomrule[1.5pt]
     \end{tabularx}
   \end{minipage}
 \end{table}
+
+另外，由于我們的系統在经过每一步決策后的中間結果都可认作为一組預测结果，我們观察了每組中間結果在测试集上的性能。表~\ref{tab:exp_irony_det_B_ensemble_result}显示我們系統的中間结果在测试集上的各项指标，注意表中的正确率、召回率、F1值均是针对各类别对应指标数据的宏平均。
+
+表中的第一行“中間结果一”对应直接由一組四分类器進行多数投票的识別结果，其F1值已超过原比赛中排名第一的数值。第二行是基于第二个分类器組的投票对被判定为“没有反讽”和“基于相反语义的反讽”的样本重新进行二选一的识別结果，可见除了召回率以外的三項指标都有所提升，可以推
+
+
+% 数据集 & 没有反讽 & 基于相反语义的反讽 & 情景反讽 & 其他反讽\\  
+
+表~\ref{tab:exp_irony_det_B_conf_mat_1}
+表~\ref{tab:exp_irony_det_B_conf_mat_2}
+表~\ref{tab:exp_irony_det_B_conf_mat_3}
+表~\ref{tab:exp_irony_det_B_conf_mat_4}
+
+\begin{table}[htb]
+  \centering
+  \begin{minipage}[t]{0.8\linewidth}
+  \caption{四分类反讽识别系统最终识别结果和中间结果的性能}
+  \label{tab:exp_irony_det_B_ensemble_result}
+    \begin{tabularx}{\linewidth}{X|cccc}
+    \toprule[1.5pt]
+    & 准确率 & 正确率 & 召回率 & F1值 \\
+    \hline
+    中间结果I & 0.6837 & 0.5512 & 0.5016 & 0.5253 \\
+    中间结果II & 0.6913 & \bf 0.5667 & 0.4920 & 0.5267 \\
+    中间结果III & 0.6913 & 0.5512 & \bf 0.5370 & 0.5440 \\
+    \hline
+    最终结果 & \bf 0.6939 & 0.5604 & \bf 0.5370 & \bf 0.5484 \\
+    \bottomrule[1.5pt]
+    \end{tabularx}
+  \end{minipage}
+\end{table}
+
+\begin{table}[]
+  \centering
+  \begin{minipage}[t]{0.8\linewidth}
+  \caption{
+    \label{tab:exp_irony_det_B_conf_mat_1}
+    反讽四分类测试集上中间结果I对应的混淆矩陣
+  }
+  \begin{tabularx}{\linewidth}{c|c|cccc}
+  \toprule[1.5pt]
+  \multicolumn{2}{c|}{\multirow{2}{*}} & \multicolumn{4}{c}{预测标签}    \\
+  \cline{3-6} 
+  \multicolumn{2}{c|}{}
+    & 没有反讽 & 相反语义 & 情景反讽 & 其他反讽  \\
+  \hline
+  \multirow{4}{*}{真实标签}
+    & 没有反讽 & 380 & 73 & 13 & 7 \\
+    & 相反语义 & 36 & 125 & 3 & 0 \\
+    & 情景反讽 & 44 & 13 & 25 & 3 \\
+    & 其他反讽 & 41 & 10 & 5 & 6 \\
+  \bottomrule[1.5pt]
+  \end{tabularx}
+  \end{minipage}
+\end{table}
+
+\begin{table}[]
+  \centering
+  \begin{minipage}[t]{0.8\linewidth}
+  \caption{
+    \label{tab:exp_irony_det_B_conf_mat_2}
+    反讽四分类测试集上中间结果II对应的混淆矩陣
+  }
+  \begin{tabularx}{\linewidth}{c|c|cccc}
+  \toprule[1.5pt]
+  \multicolumn{2}{c|}{\multirow{2}{*}} & \multicolumn{4}{c}{预测标签}    \\
+  \cline{3-6} 
+  \multicolumn{2}{c|}{}
+    & 没有反讽 & 相反语义 & 情景反讽 & 其他反讽  \\
+  \hline
+  \multirow{4}{*}{真实标签}
+    & 没有反讽 & 389 & 64 & 13 & 7 \\ 
+    & 相反语义 & 39 & 122 & 3 & 0 \\
+    & 情景反讽 & 47 & 10 & 25 & 3 \\
+    & 其他反讽 & 39 & 12 & 5 & 6 \\
+  \bottomrule[1.5pt]
+  \end{tabularx}
+  \end{minipage}
+\end{table}
+
+\begin{table}[]
+  \centering
+  \begin{minipage}[t]{0.8\linewidth}
+  \caption{
+    \label{tab:exp_irony_det_B_conf_mat_3}
+    反讽四分类测试集上中间结果III对应的混淆矩陣
+  }
+  \begin{tabularx}{\linewidth}{c|c|cccc}
+  \toprule[1.5pt]
+  \multicolumn{2}{c|}{\multirow{2}{*}} & \multicolumn{4}{c}{预测标签}    \\
+  \cline{3-6} 
+  \multicolumn{2}{c|}{}
+    & 没有反讽 & 相反语义 & 情景反讽 & 其他反讽  \\
+  \hline
+  \multirow{4}{*}{真实标签}
+    & 没有反讽 & 375 & 64 & 27 & 7 \\
+    & 相反语义 & 35 & 122 & 7 & 0 \\
+    & 情景反讽 & 33 & 10 & 39 & 3 \\
+    & 其他反讽 & 38 & 12 & 6 & 6 \\
+  \bottomrule[1.5pt]
+  \end{tabularx}
+  \end{minipage}
+\end{table}
+
+\begin{table}[]
+  \centering
+  \begin{minipage}[t]{0.8\linewidth}
+  \caption{
+    \label{tab:exp_irony_det_B_conf_mat_4}
+    反讽四分类测试集上最终识別结果对应的混淆矩陣
+  }
+  \begin{tabularx}{\linewidth}{c|c|cccc}
+  \toprule[1.5pt]
+  \multicolumn{2}{c|}{\multirow{2}{*}} & \multicolumn{4}{c}{预测标签}    \\
+  \cline{3-6} 
+  \multicolumn{2}{c|}{}
+    & 没有反讽 & 相反语义 & 情景反讽 & 其他反讽  \\
+  \hline
+  \multirow{4}{*}{真实标签}
+    & 没有反讽 & 377 & 64 & 27 & 5 \\
+    & 相反语义 & 35 & 122 & 7 & 0 \\ 
+    & 情景反讽 & 36 & 10 & 39 & 0 \\
+    & 其他反讽 & 38 & 12 & 6 & 6 \\
+  \bottomrule[1.5pt]
+  \end{tabularx}
+  \end{minipage}
+\end{table}
+
+
 
 % \subsection{错误分析}
 
