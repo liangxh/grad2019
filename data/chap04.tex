@@ -587,17 +587,15 @@
   \end{minipage}
 \end{table}
 
-另外，由于我們的系統在经过每一步決策后的中間結果都可认作为一組預测结果，我們观察了每組中間結果在测试集上的性能。表~\ref{tab:exp_irony_det_B_ensemble_result}显示我們系統的中間结果在测试集上的各项指标，注意表中的正确率、召回率、F1值均是针对各类别对应指标数据的宏平均。
+另外，由于我们的系统在经过每一步决策后的中间结果都可认作为一组预测结果，我们观察了每组中间结果在测试集上的性能。表~\ref{tab:exp_irony_det_B_ensemble_result}显示我们系统的中间结果在测试集上的各项指标，注意表中的正确率、召回率、F1值均是针对各类别对应指标数据的宏平均。
 
-表中的第一行“中間结果一”对应直接由一組四分类器進行多数投票的识別结果，其F1值已超过原比赛中排名第一的数值。第二行是基于第二个分类器組的投票对被判定为“没有反讽”和“基于相反语义的反讽”的样本重新进行二选一的识別结果，可见除了召回率以外的三項指标都有所提升，可以推
+表中的第一行“中间结果I”对应直接由一组四分类器进行多数投票的识别结果，其F1值已超过原比赛中排名第一的数值。第二行“中间结果II”是基于第二个分类器组的投票对被判定为“没有反讽”和“基于相反语义的反讽”的样本重新进行二分类的识别结果，可见除了召回率以外的三项指标都有所提升。再对比中间结果I和中间结果II的混淆矩阵（分别对应表~\ref{tab:exp_irony_det_B_conf_mat_1}和表~\ref{tab:exp_irony_det_B_conf_mat_2}）可以发现正确召回了9个“没有反讽”的样本，同时误判了3个原本识别正确的“基于相反语义的反讽”的样本，故整体准确率提升，但原本数值较低的“基于相反语义的反讽”的召回率下降拖低了整体的召回率。
 
+表中的第三行“中间结果III”是基于第三个分类器组的投票对被判定为“没有反讽”和“情景反讽”的样本重新进行二分类的识别结果，可见准确率不变，正确率稍微下降，同时召回率有了明显提高，导致F1值也明显提高。再对比中间结果II和中间结果III的混淆矩阵（分别对应表~\ref{tab:exp_irony_det_B_conf_mat_2}和表~\ref{tab:exp_irony_det_B_conf_mat_3}）可以发现误判了14个原本识别正确的“没有反讽”的样本，同时正确召回了14个“情景反讽”的样本，所以准确率不变，但由于“情景反讽”的样本总量较少而“没有反讽”的样本总量较多，“情景反讽”的召回率显着上升而拔高了宏平均的召回率，这也显示了对于宏平均的指标，关注样本量少的类别能在数值上带来明显提升。
 
-% 数据集 & 没有反讽 & 基于相反语义的反讽 & 情景反讽 & 其他反讽\\  
+表中的最底一行的“最终结果”是基于第四个分类器组的投票对被判定为“没有反讽”和“其他反讽”的样本重新进行二分类的识别结果，可见除了召回率不变，各项指标都有所提高。再对比中间结果III和最终结果的混淆矩阵（分别对应表~\ref{tab:exp_irony_det_B_conf_mat_3}和表~\ref{tab:exp_irony_det_B_conf_mat_4}）可以发现这一步把5个被误判为“其他反讽”的样本都改成了“没有反讽”，虽然其中只有2个样本的真实标签为“没有反讽”，但由于被识别为“其他反讽”的样本少，明显提高了“其他反讽”的正确率。
 
-表~\ref{tab:exp_irony_det_B_conf_mat_1}
-表~\ref{tab:exp_irony_det_B_conf_mat_2}
-表~\ref{tab:exp_irony_det_B_conf_mat_3}
-表~\ref{tab:exp_irony_det_B_conf_mat_4}
+总结以上结果，我們系統中对
 
 \begin{table}[htb]
   \centering
@@ -623,7 +621,7 @@
   \begin{minipage}[t]{0.8\linewidth}
   \caption{
     \label{tab:exp_irony_det_B_conf_mat_1}
-    反讽四分类测试集上中间结果I对应的混淆矩陣
+    反讽四分类测试集上中间结果I对应的混淆矩阵
   }
   \begin{tabularx}{\linewidth}{c|c|cccc}
   \toprule[1.5pt]
@@ -647,7 +645,7 @@
   \begin{minipage}[t]{0.8\linewidth}
   \caption{
     \label{tab:exp_irony_det_B_conf_mat_2}
-    反讽四分类测试集上中间结果II对应的混淆矩陣
+    反讽四分类测试集上中间结果II对应的混淆矩阵
   }
   \begin{tabularx}{\linewidth}{c|c|cccc}
   \toprule[1.5pt]
@@ -671,7 +669,7 @@
   \begin{minipage}[t]{0.8\linewidth}
   \caption{
     \label{tab:exp_irony_det_B_conf_mat_3}
-    反讽四分类测试集上中间结果III对应的混淆矩陣
+    反讽四分类测试集上中间结果III对应的混淆矩阵
   }
   \begin{tabularx}{\linewidth}{c|c|cccc}
   \toprule[1.5pt]
@@ -695,7 +693,7 @@
   \begin{minipage}[t]{0.8\linewidth}
   \caption{
     \label{tab:exp_irony_det_B_conf_mat_4}
-    反讽四分类测试集上最终识別结果对应的混淆矩陣
+    反讽四分类测试集上最终识别结果对应的混淆矩阵
   }
   \begin{tabularx}{\linewidth}{c|c|cccc}
   \toprule[1.5pt]
@@ -713,8 +711,6 @@
   \end{tabularx}
   \end{minipage}
 \end{table}
-
-
 
 % \subsection{错误分析}
 
