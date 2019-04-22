@@ -222,20 +222,20 @@
 
 其中 $C$对应情感类别集合\{开心，悲伤，愤怒\}，$TP_c$表示被系统预测为类别$c$，且真实标签为类别$c$的样本数量；$FP_c$表示被系统预测为类别$c$，但真实标签不是类别$c$的样本数量；$FN_c$被系统预测为不是类别$c$，但真实标签为类别$c$的样本数量。 
 
-另外，原比赛虽然以 $F_\mu$ 为排名的主要指标，但比赛组织者同样关注各个情感类别的F1值，因此在以下实验结果分析中我们也会这些指示进行观察，从而以不同角度了解系统识别性能。各个情感类别的F1值定义如下：
+%另外，原比赛虽然以 $F_\mu$ 为排名的主要指标，但比赛组织者同样关注各个情感类别的F1值，因此在以下实验结果分析中我们也会这些指示进行观察，从而以不同角度了解系统识别性能。各个情感类别的F1值定义如下：
 
-\begin{align}
-  F_c &= \frac{2 \times P_c \times R_c}{P_c + R_c}
-\end{align}
+%\begin{align}
+%  F_c &= \frac{2 \times P_c \times R_c}{P_c + R_c}
+%\end{align}
 
-其中 $P_c$ 为类别$c$的正确率，$R_c$ 为类别$c$的召回率，其定义如下：
+%其中 $P_c$ 为类别$c$的正确率，$R_c$ 为类别$c$的召回率，其定义如下：
 
-\begin{align}
-  P_c &= \frac{TP_c}{TP_c + FP_c} \\
-  R_c &= \frac{TP_c}{TP_c + FN_c}
-\end{align} 
+%\begin{align}
+%  P_c &= \frac{TP_c}{TP_c + FP_c} \\
+%  R_c &= \frac{TP_c}{TP_c + FN_c}
+%\end{align} 
 
-其中$TP_c$，$FP_c$，$FN_c$的定义和前面的相同。
+%其中$TP_c$，$FP_c$，$FN_c$的定义和前面的相同。
 
 \subsection{模型训练}
 \label{ssec:exp_context_emo_model_training}
