@@ -218,15 +218,7 @@
 
 \end{itemize}
 
-以上功能我们利用了第三方的英语微博文本处理工具\textit{ekphrasis}\footnote{https://github.com/cbaziotis/ekphrasis}完成，对于其中如何分词、如何识别电话号码和日期、以及颜文字到情感标签的详细映射关系列表，读者可以直接参考其代码实现和配置文件。
-
-\subsection{实验设置}
-
-以下实验主要分成两大部分。第一部分是分析不同模型在不同子分类问题下的性能，根据章节\ref{sec:exp_irony_det_framework}，我们最终的反讽识别框架涉及以下多个子分类问题：区分四个反讽类别的四分类问题、区分“没有反讽”和“基于相反语义的反讽”的二分类问题、区分“没有反讽”和“情景反讽”的二分类问题、区分“没有反讽”和“其他反讽”的二分类问题。对于各个子分类问题，我们基于章节~\ref{sec:exp_irony_det_framework}中的子分类模型框架进行实验，透过采用不同配置了解不同模型文本反讽识别的拟合能力。
-
-第二部分是分析我们设计的识别系统的性能。我们会观察每一轮决策的调整如何改变局部的预测结果，而这些局部变化如何影响系统的整体性能。
-
-%另外我们也会透过对设计的系统框架进行修改和比较，分析设计的合理性，以及当尝试将这种识别系统设计方式应用到其他场景时有哪些细节值得注意。
+以上功能我们利用了第三方的英语文本处理工具\textit{ekphrasis}\footnote{https://github.com/cbaziotis/ekphrasis}完成，对于其中如何分词、如何识别电话号码和日期、以及颜文字到情感标签的详细映射关系列表，读者可以直接参考其代码实现和配置文件。
 
 \subsection{评价指标}
 
@@ -285,12 +277,16 @@
     w_c = \frac{N}{|C| \times N_c}
 \end{align}
 
-\subsection{结果与分析}
+\subsection{实验与分析}
 
-\subsubsection{面向“没有反讽”和“带有反讽”的二分类模型性能分析}
+对应章节~\ref{sec:global_framework}，我们的实验分成两大部分。第一部分针对各个子分类问题进行研究，根据章节~\ref{sec:exp_irony_det_framework}，我们的反讽识别系统涉及以下多个子分类问题：区分四个反讽类别的四分类问题、区分“没有反讽”和“基于相反语义的反讽”的二分类问题、区分“没有反讽”和“情景反讽”的二分类问题、区分“没有反讽”和“其他反讽”的二分类问题。对于每个子分类问题，我们基于章节~\ref{sec:exp_irony_det_framework}中提出的分类器模型框架进行实验，比较不同模型的建模能力，同时观察它们在不同子分类问题下性能区别。
+
+第二部分对我们提出的基于多步决策的的识别系统进行研究。一方面评估我们系统的整体性能水平，另一方面透过观察系统的中间结果分析多步决策如何对系统的整体性能带来影响，从而解释此系统设计的合理性。
+
+\subsubsection{面向“没有反讽”和“带有反讽”二分类的模型性能分析}
 \label{sssec:exp_irony_det_A_base}
 
-对面向“没有反讽”和“带有反讽”的二分类问题，表~\ref{tab:exp_irony_det_A_single_result}和图~\ref{fig:exp_irony_det_A_single_result_bar}显示不同卷积神经网络和迭归神经网络在测试集上能达到的性能。注意表中的正确率、召回率、F1值均是针对类别“带有反讽”的指标，对应比赛SemEval2018任务三子任务一关注的主要指标。
+对面向“没有反讽”和“带有反讽”的二分类问题，表~\ref{tab:exp_irony_det_A_single_result}和图~\ref{fig:exp_irony_det_A_single_result_bar}显示各个模型在测试集上能达到的性能。注意表中的正确率、召回率、F1值均是针对类别“带有反讽”的指标，对应比赛SemEval2018任务三子任务一关注的主要指标。
 
 对于F1值，2层BiLSTM的表现最好，其次是LSTM配合注意力机制，其F1值和前者非常靠近（偏差0.0009），第三为单层的BiLSTM，其F1值和前两者则差距明显（0.0093以上）。对于准确率，单层BiLSTM配合注意力机制和2层BiLSTM配合注意力机制达到最好的数值0.6888 ，第三为LSTM配合注意力机制，其准确率和前两者偏差较小（0.026）。对于正确率，2层BiLSTM配合注意力机制达到最好的数值0.5870 ，其次是单层BiLSTM配合注意力机制，与前者偏差较小（0.0009），第三的LSTM配合注意力机制则和和前两者则差距明显（0.093）。对于召回率，单层的LSTM达到最好的0.8617 ，第二的2层BiLSTM和前者的差距明显（0.0385）。
 
@@ -299,7 +295,7 @@
 \begin{table}[htb]
   \centering
   \begin{minipage}[t]{\linewidth}
-  \caption{面向“没有反讽”和“带有反讽”的二分类模型性能}
+  \caption{面向“没有反讽”和“带有反讽”二分类的模型性能}
   \label{tab:exp_irony_det_A_single_result}
     \begin{tabularx}{\linewidth}{X|llll}
     \toprule[1.5pt]
@@ -330,14 +326,14 @@
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{img/exp_irony_det_A_single_result_bar.png}
-  \caption{面向“没有反讽”和“带有反讽”的二分类模型性能}
+  \caption{面向“没有反讽”和“带有反讽”二分类的模型性能}
   \label{fig:exp_irony_det_A_single_result_bar}
 \end{figure}
 
 \subsubsection{面向反讽四分类的模型性能分析}
 \label{sssec:exp_irony_det_B_base}
 
-对于面向反讽四分类问题，表~\ref{tab:exp_irony_det_B_result}和图~\ref{fig:exp_irony_det_B_single_result_bar}显示不同卷积神经网络和迭归神经网络在测试集上能达到的性能。注意表中的正确率、召回率、F1值均是
+对于面向反讽四分类问题，表~\ref{tab:exp_irony_det_B_result}和图~\ref{fig:exp_irony_det_B_single_result_bar}显示各个模型在测试集上能达到的性能。注意表中的正确率、召回率、F1值均是
 各类别对应指标数据的宏平均，对应比赛SemEval2018任务三子任务二关注的主要指标。
 
 对于F1值，BiGRU达到最好的数值（0.4768），其次是2层BiLSTM以及配合注意力机制的2层BiLSTM，与前者的数值差距明显（0.0111）。对于准确率，同样由BiGRU达到最好的数值（0.6722），其次是BiLSTM和2层BiLSTM，和前者的数值差距明显（0.014）。对于正确率，CNN和2层BiLSTM的性能较好（在0.5以上），第三的BiLSTM则在0.49以下。对于召回率，2层BiLSTM配合注意力机制达到最好的0.4864 ，其次的BiGRU和BiLSTM则和前者差距明显（0.0085）。
@@ -382,10 +378,10 @@
   \label{fig:exp_irony_det_B_single_result_bar}
 \end{figure}
 
-\subsubsection{面向“没有反讽”和“基于相反语义的反讽”二分类的实验结果分析}
+\subsubsection{面向“没有反讽”和“基于相反语义的反讽”二分类的模型性能分析}
 \label{sssec:exp_irony_det_Bb01_base}
 
-对于面向“没有反讽”和“基于相反语义的反讽”的二分类问题，表~\ref{tab:exp_irony_det_Bb01_result}和图~\ref{fig:exp_irony_det_Bb01_single_result_bar}显示不同卷积神经网络和迭归神经网络在测试集上能达到的性能。注意表中的正确率、召回率、F1值指两个类别对应指标数据的宏平均。
+对于面向“没有反讽”和“基于相反语义的反讽”的二分类问题，表~\ref{tab:exp_irony_det_Bb01_result}和图~\ref{fig:exp_irony_det_Bb01_single_result_bar}显示各个模型在测试集上能达到的性能。注意表中的正确率、召回率、F1值指两个类别对应指标数据的宏平均。
 
 对于F1值，LSTM配合注意力机制达到最大数值的0.7752 ，其后依次为BiGRU和GRU，和前者差距约较小（0.0047)。对于准确率，同样是LSTM配合注意力机制达到最好的效果（0.8275），其后依次为GRU和BiGRU，和前者差距大（0.0157）。对于正确率，还是 LSTM配合注意力机制的数值最高（0.7717），其后依次为GRU和BiGRU，和前者差距大（0.0151）。对于召回率，数值最高的是BiGRU（0.7993），其次是GRU和LSTM，和前者差距均较小（0.0049）。
 
@@ -432,7 +428,7 @@
 \subsubsection{面向“没有反讽”和“情景反讽”二分类的模型性能分析}
 \label{sssec:exp_irony_det_Bb02_base}
 
-对于面向“没有反讽”和“情景反讽”的二分类问题，表~\ref{tab:exp_irony_det_Bb02_result}和图~\ref{fig:exp_irony_det_Bb02_single_result_bar}显示不同卷积神经网络和迭归神经网络在测试集上能达到的性能。注意表中的正确率、召回率、F1值指两个类别对应指标数据的宏平均。
+对于面向“没有反讽”和“情景反讽”的二分类问题，表~\ref{tab:exp_irony_det_Bb02_result}和图~\ref{fig:exp_irony_det_Bb02_single_result_bar}显示各个模型在测试集上能达到的性能。注意表中的正确率、召回率、F1值指两个类别对应指标数据的宏平均。
 
 对于F1值和召回率，2层BiLSTM配合注意力机制在这两个指标上都达到了最好的效果（数值分别为0.6924 和 0.6806），其次是2层BiLSTM，第三是单层的BiLSTM配合注意力机制，但后两者在准确率和正确率这两项指标上都排在靠后的位置。而对于准确率和正确率，均由CNN达到最好的效果（数值分别为0.8656和 0.7634），其次是2层BiLSTM配合注意力机制，第三是单层的LSTM。
 
@@ -479,7 +475,7 @@
 \subsubsection{面向“没有反讽”和“其他反讽”二分类的模型性能分析}
 \label{sssec:exp_irony_det_Bb03_base}
 
-对于面向“没有反讽”和“其他反讽”的二分类问题，表~\ref{tab:exp_irony_det_Bb03_result}和图~\ref{fig:exp_irony_det_Bb03_single_result_bar}显示不同卷积神经网络和迭归神经网络在测试集上能达到的性能。注意表中的正确率、召回率、F1值指两个类别对应指标数据的宏平均。
+对于面向“没有反讽”和“其他反讽”的二分类问题，表~\ref{tab:exp_irony_det_Bb03_result}和图~\ref{fig:exp_irony_det_Bb03_single_result_bar}显示各个模型在测试集上能达到的性能。注意表中的正确率、召回率、F1值指两个类别对应指标数据的宏平均。
 
 对于F1值，性能最好的是CNN（0.6016），其次是GRU，与前者差距明显（约0.0163），第三为BiLSTM，明显低于CNN的数值（差距约为0.0489）。对于准确率，同样是CNN达到最高的数值（0.8860），其次是GRU配合注意力机制以及LSTM配合注意力机制，在数值上比较接近（差距仅0.0019）。对于正确率，依然是CNN的性能最优（0.7123），第二是GRU配合注意力机制，但和前者差距较明显（约0.0195），第三的GRU则远差于前两者（差距达0.1以上)。 对于召回率，则是GRU的效果最好（0.5836），其次是CNN，与前者差距较小（约0.0055），第三的BiLSTM则和前两者差距较大（达0.0313）。
 
