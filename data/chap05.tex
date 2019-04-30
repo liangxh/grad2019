@@ -7,14 +7,14 @@
 
 国际比赛SemEval-2019的任务三\cite{SemEval2019Task3}则是旨在促进引入上下文背景的文本情感识别研究，比赛要求参赛者开发一个情感识别系统，对三轮对话中最后一轮发言表达的情感进行分类，给定的四个情感类别包括：开心、悲伤、愤怒、其他。为此我们提出了一个多通道模型，以引入作为上下文的前两轮对话。本章节中我们将基于SemEval-2019的任务三进行实验，采用比赛组织者提供的训练数据和测试数据，并透过和其他参赛系统进行比较来评估我们提出的框架的性能。
 
-本章的内容安排如下。在章节\ref{sec:exp_context_emo_format}中，我们会基于章节\ref{sec:global_problem_analysis}首先给出当前问题的形式化表示。在章节\ref{sec:exp_context_emo_data}中我们再对具体实验数据进行观察，分析给定数据集中各个情感类别的分布情况以及其文本特性。在章节\ref{sec:exp_context_emo_framework}中，我们会基于章节\ref{sec:global_framework}的框架给出我们对当前问题的系统框架。最后在章节\ref{sec:exp_context_emo_exp}给出实验的细节，以及对实验结果进行分析。
+本章的内容安排如下。在章节\ref{sec:exp_context_emo_format}中，我们会首先给出当前问题的形式化表示。在章节\ref{sec:exp_context_emo_data}中我们再对具体实验数据进行观察，分析给定数据集中各个情感类别的分布情况以及其文本特性。在章节\ref{sec:exp_context_emo_framework}將给出我们針对当前问题提出的识別系統框架，以及組成该系統的多通道模型结构。最后在章节\ref{sec:exp_context_emo_exp}，我們会给出实验的细节，以及对实验结果进行分析。
 
 \section{形式化表示}
 \label{sec:exp_context_emo_format}
 
 在本章中，我们要研究三轮对话的情感识别。给定一个情感类别集合$C$，对于一个三轮对话的集合$S$，其中任意一个样本$s$可以表示为一个三元组$<t^1, t^2, t^3>$对应三段文本，其中最后一轮发言$t^3$是被识别情感的主体，上下文$b=<t^1, t^2>$是$t^3$的背景信息。假设$t^3$在背景$b$下属于唯一一种情感倾向$c \in C$。又给定一个词集合$W$，对任意一轮的文本$t^j, j=1,2,3$，经过文本预处理后可以表示为一个长度为$L^j$的词序列 $w^j = <w^j_1, w^j_2, ..., w^j_{L^j}>, w^j_i \in W, i \in [1, L^j]$。那么我们的目标是找出一个映射关系$F_C$，使得$c=F_C(w^3, <w^1, w^2>)$。
 
-\section{数据观察}
+\section{实验数据}
 \label{sec:exp_context_emo_data}
 
 我们的实验完全采用SemEval-2019的任务三比赛组织者提供的数据集，其中每个样本对应一个三轮对话以及第三轮发言的情感标签，第一轮为用户甲的发言（以下简称为A1），第二轮为用户乙对第一轮的回复（以下简称为B），第三轮为用户甲对第二轮中用户乙的回复（以下简称为A2）。情感标签对应四个情感类别中的其中一种：开心、悲伤、愤怒、其他。表\ref{tab:semeval_2019_task3_data}显示数据集各类别样本数量分布，表\ref{tab:semeval_2019_task3_sample}。
@@ -43,7 +43,7 @@
   \label{tab:semeval_2019_task3_sample}
     \begin{tabularx}{\linewidth}{l|XXX}
     \toprule[1.5pt]
-    \small 情感类别 & 第一轮 & 第二轮 & 第三轮 \\
+    \small 类别 & 第一轮 & 第二轮 & 第三轮 \\
     \hline
     \small 开心 & live in uttra khand & ohh nice! love that place!∧.∧ & :):) \\
     \small 悲伤 & Not coz of you & why? Tell me & :( My girlfriend left me \\
@@ -87,7 +87,7 @@
 \subsection{文本特征}
 \label{ssec:exp_context_emo_data_text}
 
-对于比赛中提供的数据集，比赛组织者并没有给出数据的具体来源，但经过人工观察后我们可以发现一些社交网络上常见的文本特征，其中出现频率较高的模式如下：
+对于比赛中提供的数据集，比赛组织者并没有给出数据的具体来源，但经过人工观察后我们可以发现一些社交网络上常见的文本特征，其中出现频率较高的特征如下：
 
 \begin{itemize}
 
@@ -561,7 +561,7 @@
   \begin{tabularx}{\linewidth}{c|c|l}
   \toprule[1.5pt]
 
-   编号 & 情感类别 & 对话    \\
+   编号 & 类别 & 对话    \\
   \hline
   \multirow{3}{*}{1} & \multirow{3}{*}{开心} 
     &   （第一轮）用户甲: I'm in mood \\
