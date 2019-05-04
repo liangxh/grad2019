@@ -72,14 +72,13 @@
 
 \begin{enumerate}
 
-\item {\bf 基于多步决策的多分类系统框架}。随着现实中应用场景变得复杂，需要解决的多分类问题越来越多。随着需要区分的类别越多，对数据拟合的难度更高，另外对识别性能的要求也变得复杂，譬如确保个别类别的召回率和正确率等。为此，我们提出了一种基于多步决策的多分类系统设计方法，把一个多分类问题拆解成多个子分类问题的叠加，再透过逐步回答每个子问题得出最终的识别结果。由于识別过程中每一步只关注一个子分类问题，所以我們能从局部调整系统的识别能力，並针对特殊的评价指标进行优化。另一方面，每一步的子問题可以分別采用不同的算法，以此结合多种模型的模型能力。
+\item {\bf 基于多步决策的多分类系统框架}。随着现实中应用场景变得复杂，需要解决的多分类问题越来越多。当区分的类别越多，机器学习算法对数据进行拟合的难度更高，另外对识别性能的要求也变得复杂，譬如确保个别类别的召回率和正确率等。为此，我们提出了一种基于多步决策的多分类系统框架，把一个多分类问题拆解成多个子分类问题的叠加，再透过逐步回答每个子问题得出最终的识别结果。由于识别过程中每一步只关注一个子分类问题，我们能从局部调整系统的识别能力，并针对特定的评价指标进行优化。另一方面，每个子分类问题可以分别采用不同的算法，以此结合不同模型能捕捉到的不同信息。
 
-
-\item {\bf 用于结合上下文的多通道模型}。在文本情感识别中，有时候仅凭一段文本无法准确了解发言者想表达的意思和态度，在一些场景下我们会考虑引入文本的上下文作为提示。为此我们提出了一种多通道模型框架，让对识别目标起不同作用的上下文先分别经过不同的编码器进行编码提取出有用的特征，再考虑合并正文和上下文的信息得出识别结果。
+\item {\bf 用于结合上下文的多通道模型}。在某些场景下，仅凭一段文本无法准确了解发言者想表达的意思和态度。为了处理这种情況，一些文本情感识別研究会引入上下文作为提示。为此我们提出了一种多通道模型框架，让对识别目标起不同作用的上下文先分别经过不同的编码器进行编码提取出有用的特征，再考虑合并正文和上下文的信息得出识别结果。
 
 \end{enumerate}
 
-为了验证基于多步决策多分类系统框架，我们将其应用于面向微博的反讽识别，根据公开比赛SemEval-2018的任务三进行实验，结果显示我们的模型超过了当时排名第一的系统。
+为了验证基于多步决策的多分类系统框架，我们首先将其应用于面向微博的反讽识别，根据国际比赛SemEval-2018的任务三进行实验，结果显示我们的模型超过了当时排名第一的系统。
 另外为了验证我们提出的多通道分类模型，我们将其应用于面向三轮对话的情感识别，根据公开比赛SemEval-2019的任务三进行实验，结果显示我们的模型达到了当时排名前十的性能。
 
 % 关键词是为了文献标引工作、用以表示全文主要内容信息的单词或术语。关键词不超过 5
@@ -93,17 +92,17 @@
 
 \begin{eabstract}
 
-Since the poularization of Web 2.0, people get used to share they thoughts and emotions on different online platforms. By analyzing the sentiment of these data, we can have an in sight into the people's opinion towards certain things. Vast commercial and political values can be obtained by fast response to the people's opinion, therefore related technologies are getting more attention. As text is one of the mostly used media on social platform, text sentiment analysis has become a popular research field. The thesis explores two problems in text sentiment analysis and it is organized as follows:
+Since the poularization of Web 2.0, people get used to share they thoughts and emotions on different online platforms. By analyzing the sentiment of these data, we can have an in sight into the people's opinion towards certain things. Vast commercial and political values can be obtained through quick response to the people's attitude. Therefore related technologies are getting more attention. As text is one of the mostly used media on social platforms, text sentiment analysis has become a popular research field. This thesis explores two problems in text sentiment analysis and it is organized as follows:
 
 \begin{enumerate}
 
-\item {\bf Multi-step-decision-making based multi-classification system framework}. As application scenes in the real world are becoming more complicated, more multi-classification problems are encountered. As the data are divided into more categories, it becomes more difficult for machine learning algorithms to fit the data. On the other hand, the requirement of predictive performance are getting more complicated, such as ensuring the recall rate and the precision level of certain categories. Hence, we propose a multi-step-decision-making based multi-classification system framework, which disassembles a multi-classification problem into a sequence of several sub-classification problems and classifies an object by answering the sub-questions step by step. As the classification system only focuses on a sub-question at each step, its performance can be adjusted locally and we can optimize the overall performance for certain evaluation metrics. On the other hand, algorithms can be chosen for each sub-problem individually, hence the information captured by different kinds of models can be combined in the system. 
+\item {\bf Multi-step-decision-making based multi-classification system framework}. As real-world application scenes are becoming more complex, more multi-classification problems are encountered. As the data are divided into more categories, it becomes more difficult for machine learning algorithms to fit the data. On the other hand, the requirement of predictive performance are getting more complicated, such as ensuring the recall rate and the precision level of certain categories. Hence, we propose a multi-step-decision-making based multi-classification system framework, which disassembles a multi-classification problem into a sequence of sub-classification problems and classifies an object by answering the sub-questions step by step. As the classification system only focuses on a sub-problem at each step, its performance can be adjusted locally and we can optimize the overall performance for certain evaluation metrics. On the other hand, algorithms can be chosen for each sub-problem individually, hence the information captured by different kinds of models can be combined in the system.
 
-\item {\bf Multi-channel model for manipulating contextual information}. Sometimes we may not exactly understand what a person want to express or how he feels only by reading his written message. To deal with this problem, some of the text sentiment analysis researches take into account the contextual clues. Therefore, we propose a multi-channel model. By feeding contextual information that play different parts of role into different feature encoders, features of different parts of the context are encoded and combined with that of the main text to get the identification result.
+\item {\bf Multi-channel model for manipulating contextual information}. Sometimes we may not exactly understand what a person want to express or how he feels only through his written message. To deal with this problem, some of the text sentiment analysis researches take into account the contextual clues. Therefore, we propose a multi-channel model. By feeding contextual information that play different parts of role into different feature encoders, features of different parts of the context are encoded and further combined with that of the main message to get the identification result.
 
 \end{enumerate}
 
-To verify the effectiveness of the proposed multi-step-decision-making based multi-classification system framework, we apply it to irony detection in English tweets. Experiments are launched based on SemEval-2018 Task 3. Results show that our system exceeds the performance of the no. 1 system. On the other hand, to verify the effectiveness of our multi-channel model, we apply it to contextual emotion detection in text. Experiments are launched based on SemEval-2019 Task 3. Results show that our system reaches the top 10 performance.
+To verify the effectiveness of the proposed multi-step-decision-making based multi-classification system framework, we first apply it to irony detection in English tweets. Experiments are launched based on SemEval-2018 Task 3. Results show that our system exceeds the performance of the no. 1 participating system. On the other hand, to verify the effectiveness of our multi-channel model, we apply it to contextual emotion detection in text. Experiments are launched based on SemEval-2019 Task 3. Results show that our system reaches the top 10 performance among the participants.
 
 \end{eabstract}
 
