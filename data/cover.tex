@@ -68,13 +68,14 @@
 % 定义中英文摘要和关键字
 \begin{cabstract}
 
-自Web2.0普及后，人们习惯在互联网的各种平台上透过不同的媒体来分享和传递他们的想法和情感。透过对这些媒体进行情感分析，我们可以得知人们对特定人事物的想法和态度。譬如透过分析产品评论了解用户对新产品是否满意，又或者分析社交平台上的舆论了解网民对新政策是否同意，以此快速响应，其中蕴含着丰富的商业价值和政治价值，其相关技术的研究价值在近年也得到了重视。而文本作为较常用于发表意见的媒体之一，加之部分微博等社交平台推出了用户生产数据的采集服务，提供了充裕的文本数据资源，面向文本的情感识别研究得以更快的速度发展。本文针对面向文本的情感识别主要作出了以下贡献：
+自Web2.0普及后，人们逐渐习惯在互联网的各种平台上分享他们的想法和情感。透过对这些媒体进行情感分析，我们可以得知人们对特定人事物的想法和态度。对人们的想法快速作出响应能够带来相应的商业价值和政治价值，其相关技术也因此得到了重视。而文本作为社交平台上的主要媒体之一，面向文本的情感识别在近年也成为了热门的研究领域。本论文探讨了文本情感识别中的两个问题，主要内容如下：
 
 \begin{enumerate}
 
-\item 基于多步决策的多分类系统设计方法。随着现实中应用场景变得复杂，需要解决的多分类问题越来越大，和二分类问题相比，随着需要区分的类别越多，对机器学习算法的拟合能力要求更高，另外对系统的性能要求也变得复杂，譬如确保个别类别的召回率和正确率等。为此，我们提出了一种基于多步决策的多分类系统设计方法，透过把一个多分类问题拆解成多个子分类问题，再透过逐步回答每个子问题得出最终的识别结果。一方面，由于每一步只关注一个子分类问题，所以能局部提高系统的识别能力。另一方面，透过把原问题拆解成了子问题，我们可以调整个别类别之间的区分能力，从而针对特殊的评价指标进行优化。
+\item {\bf 基于多步决策的多分类系统框架}。随着现实中应用场景变得复杂，需要解决的多分类问题越来越多。随着需要区分的类别越多，对数据拟合的难度更高，另外对识别性能的要求也变得复杂，譬如确保个别类别的召回率和正确率等。为此，我们提出了一种基于多步决策的多分类系统设计方法，把一个多分类问题拆解成多个子分类问题的叠加，再透过逐步回答每个子问题得出最终的识别结果。由于识別过程中每一步只关注一个子分类问题，所以我們能从局部调整系统的识别能力，並针对特殊的评价指标进行优化。另一方面，每一步的子問题可以分別采用不同的算法，以此结合多种模型的模型能力。
 
-\item 用于结合上下文的多通道模型。在文本情感识别中，有时候仅凭一段文本无法准确了解发言者想表达的意思和态度，在一些场景下我们会考虑引入文本的上下文作为提示。为此我们提出了一种多通道模型框架，让对识别目标起不同作用的上下文先分别经过不同的编码器进行编码提取出有用的特征，再考虑合并本文和上下文的信息得出识别结果。
+
+\item {\bf 用于结合上下文的多通道模型}。在文本情感识别中，有时候仅凭一段文本无法准确了解发言者想表达的意思和态度，在一些场景下我们会考虑引入文本的上下文作为提示。为此我们提出了一种多通道模型框架，让对识别目标起不同作用的上下文先分别经过不同的编码器进行编码提取出有用的特征，再考虑合并正文和上下文的信息得出识别结果。
 
 \end{enumerate}
 
@@ -91,8 +92,18 @@
 % \ckeywords{\TeX, \LaTeX, CJK, 模板, 论文}
 
 \begin{eabstract}
-   
-   pass
+
+Since the poularization of Web 2.0, people get used to share they thoughts and emotions on different online platforms. By analyzing the sentiment of these data, we can have an in sight into the people's opinion towards certain things. Vast commercial and political values can be obtained by fast response to the people's opinion, therefore related technologies are getting more attention. As text is one of the mostly used media on social platform, text sentiment analysis has become a popular research field. The thesis explores two problems in text sentiment analysis and it is organized as follows:
+
+\begin{enumerate}
+
+\item {\bf Multi-step-decision-making based multi-classification system framework}. As application scenes in the real world are becoming more complicated, more multi-classification problems are encountered. As the data are divided into more categories, it becomes more difficult for machine learning algorithms to fit the data. On the other hand, the requirement of predictive performance are getting more complicated, such as ensuring the recall rate and the precision level of certain categories. Hence, we propose a multi-step-decision-making based multi-classification system framework, which disassembles a multi-classification problem into a sequence of several sub-classification problems and classifies an object by answering the sub-questions step by step. As the classification system only focuses on a sub-question at each step, its performance can be adjusted locally and we can optimize the overall performance for certain evaluation metrics. On the other hand, algorithms can be chosen for each sub-problem individually, hence the information captured by different kinds of models can be combined in the system. 
+
+\item {\bf Multi-channel model for manipulating contextual information}. Sometimes we may not exactly understand what a person want to express or how he feels only by reading his written message. To deal with this problem, some of the text sentiment analysis researches take into account the contextual clues. Therefore, we propose a multi-channel model. By feeding contextual information that play different parts of role into different feature encoders, features of different parts of the context are encoded and combined with that of the main text to get the identification result.
+
+\end{enumerate}
+
+To verify the effectiveness of the proposed multi-step-decision-making based multi-classification system framework, we apply it to irony detection in English tweets. Experiments are launched based on SemEval-2018 Task 3. Results show that our system exceeds the performance of the no. 1 system. On the other hand, to verify the effectiveness of our multi-channel model, we apply it to contextual emotion detection in text. Experiments are launched based on SemEval-2019 Task 3. Results show that our system reaches the top 10 performance.
 
 \end{eabstract}
 
