@@ -14,7 +14,7 @@
   %=========
   % 中文信息
   %=========
-  ctitle={基于多步决策的文本情感识别},
+  ctitle={面向社交文本的情感识别研究},
   cdegree={工学硕士},
   cdepartment={计算机科学与技术系},
   cmajor={计算机科学与技术},
@@ -36,7 +36,7 @@
   %=========
   % 英文信息
   %=========
-  etitle={Multi-step-decision-making Based Text Sentiment Analysis},
+  etitle={Sentiment Analysis in Social Text},
   % 这块比较复杂，需要分情况讨论：
   % 1. 学术型硕士
   %    edegree：必须为Master of Arts或Master of Science（注意大小写）
@@ -74,7 +74,7 @@
 
 \item {\bf 基于多步决策的多分类系统框架}。随着现实中应用场景变得复杂，需要解决的多分类问题越来越多。当区分的类别越多，机器学习算法对数据进行拟合的难度更高，另外对识别性能的要求也变得复杂，譬如确保个别类别的召回率和正确率等。为此，我们提出了一种基于多步决策的多分类系统框架，把一个多分类问题拆解成多个子分类问题的叠加，再透过逐步回答每个子问题得出最终的识别结果。由于识别过程中每一步只关注一个子分类问题，我们能从局部调整系统的识别能力，并针对特定的评价指标进行优化。另一方面，每个子分类问题可以分别采用不同的算法，以此结合不同模型能捕捉到的不同信息。
 
-\item {\bf 用于结合上下文的多通道模型}。在某些场景下，仅凭一段文本无法准确了解发言者想表达的意思和态度。为了处理这种情況，一些文本情感识別研究会引入上下文作为提示。为此我们提出了一种多通道模型框架，让对识别目标起不同作用的上下文先分别经过不同的编码器进行编码提取出有用的特征，再考虑合并正文和上下文的信息得出识别结果。
+\item {\bf 用于结合上下文的多通道模型}。在某些场景下，仅凭一段文本无法准确了解发言者想表达的意思和态度。为了处理这种情况，一些文本情感识别研究会引入上下文作为提示。为此我们提出了一种多通道模型框架，让对识别目标起不同作用的上下文先分别经过不同的编码器进行编码提取出有用的特征，再考虑合并正文和上下文的信息得出识别结果。
 
 \end{enumerate}
 
@@ -96,7 +96,7 @@ Since the poularization of Web 2.0, people get used to share they thoughts and e
 
 \begin{enumerate}
 
-\item {\bf Multi-step-decision-making based multi-classification system framework}. As real-world application scenes are becoming more complex, more multi-classification problems are encountered. As the data are divided into more categories, it becomes more difficult for machine learning algorithms to fit the data. On the other hand, the requirement of predictive performance are getting more complicated, such as ensuring the recall rate and the precision level of certain categories. Hence, we propose a multi-step-decision-making based multi-classification system framework, which disassembles a multi-classification problem into a sequence of sub-classification problems and classifies an object by answering the sub-questions step by step. As the classification system only focuses on a sub-problem at each step, its performance can be adjusted locally and we can optimize the overall performance for certain evaluation metrics. On the other hand, algorithms can be chosen for each sub-problem individually, hence the information captured by different kinds of models can be combined in the system.
+\item {\bf Hierarchical ensemble system framework for multi-classification}. As real-world application scenes are becoming more complex, more multi-classification problems are encountered. As the data are divided into more categories, it becomes more difficult for machine learning algorithms to fit the data. On the other hand, the requirement of predictive performance are getting more complicated, such as ensuring the recall rate and the precision level of certain categories. Hence, we propose a hierarchical ensemble system framework for multi-classification, which disassembles a multi-classification problem into a sequence of sub-classification problems and classifies an object by answering the sub-questions step by step. As the classification system only focuses on a sub-problem at each step, its performance can be adjusted locally and we can optimize the overall performance for certain evaluation metrics. On the other hand, algorithms can be chosen for each sub-problem individually, hence the information captured by different kinds of models can be combined in the system.
 
 \item {\bf Multi-channel model for manipulating contextual information}. Sometimes we may not exactly understand what a person want to express or how he feels only through his written message. To deal with this problem, some of the text sentiment analysis researches take into account the contextual clues. Therefore, we propose a multi-channel model. By feeding contextual information that play different parts of role into different feature encoders, features of different parts of the context are encoded and further combined with that of the main message to get the identification result.
 
