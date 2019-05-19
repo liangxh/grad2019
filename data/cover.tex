@@ -72,9 +72,9 @@
 
 \begin{enumerate}
 
-\item {\bf 多分类器分层识别算法}。随着现实中应用场景变得复杂，需要解决的多分类问题越来越多。当区分的类别越多，机器学习算法对数据进行拟合的难度越高，另外对识别性能的要求也变得复杂，譬如确保个别类别的召回率和正确率等。为此，我们提出了一种多分类器分层识别算法，把一个多分类问题拆解成多个子分类问题的叠加，再透过逐步回答每个子问题得出识别结果。由于识别过程中每一步只关注一个子分类问题，我们能从局部调整整个算法的识别性能，以满足特定的性能指标。另一方面，算法中的每个组成部分可以分别采用不同的模型，以此结合不同模型的建模能力。
+\item {\bf 多分类器分层识别算法}。随着现实中应用场景变得复杂，需要解决的多分类问题越来越多。当区分的类别越多，机器学习算法对数据进行拟合的难度越高，另外对识别性能的要求也变得复杂，譬如确保个别类别的召回率和正确率等。为此，我们提出了一种多分类器分层识别算法，把一个多分类问题拆解成多个子分类问题的叠加，再透过逐步回答每个子问题得出识别结果。由于识别过程中每一步只关注一个子分类问题，我们能从局部调整整个算法的识别性能，以满足特定的性能要求。另一方面，算法中的每个组成部分可以分别采用不同的模型，以此结合不同模型的建模能力。
 
-\item {\bf 用于结合上下文的多通道模型}。在某些场景下，仅凭一段文本无法准确理解发言者想表达的意思和态度。为了处理这种情况，一些文本情感识别研究会引入上下文作为提示。为此我们提出了一种多通道模型框架，让对识别目标起不同作用的上下文先分别经过不同的编码器进行编码提取出有用的特征，再考虑合并正文和上下文的信息得出识别结果。
+\item {\bf 用于结合上下文的多通道模型}。在某些场景下，仅凭一段文本无法准确理解发言者想表达的意思和态度。为了处理这种情况，一些文本情感识别研究会引入上下文作为提示。为此我们提出了一种多通道模型框架，让对识别目标起不同作用的上下文先分别经过不同的编码器进行编码提取出有用的特征，再合并正文和上下文的信息得出识别结果。
 
 \end{enumerate}
 
@@ -95,9 +95,9 @@ Since the poularization of Web 2.0, people get used to share they thoughts and e
 
 \begin{enumerate}
 
-\item {\bf Hierarchical ensemble algorithm framewrok for multi-classification}. As real-world application scenes are becoming more complex, more multi-classification problems are encountered. As the data are divided into more categories, it becomes more difficult for machine learning algorithms to fit the data. On the other hand, the requirement of predictive performance are getting more complicated, such as ensuring the recall rate and the precision level of certain categories. Hence, we propose a hierarchical ensemble algorithm framework for multi-classification, which disassembles a multi-classification problem into a sequence of sub-classification problems and classifies an object by answering the sub-questions step by step. As the algorithm only focuses on a sub-problem at each step, its performance can be adjusted locally to ensure the overall performance for certain evaluation metrics. On the other hand, models can be chosen for each sub-problem individually, hence the information captured by different kinds of models can be combined in the system.
+\item {\bf Hierarchical ensemble algorithm framewrok for multi-classification}. As real-world application scenes are becoming more complex, more multi-classification problems are encountered. As the data are divided into more categories, it becomes more difficult for machine learning algorithms to fit the data. On the other hand, the requirement of predictive performance are getting more complicated, such as ensuring the recall rate and the precision level of certain categories. Hence, we propose a hierarchical ensemble algorithm framework for multi-classification, which disassembles a multi-classification problem into a sequence of sub-classification problems and classifies an object by answering the sub-questions step by step. As the algorithm only focuses on a sub-problem at each step, its performance can be adjusted locally to fulfil certain performance requirements. On the other hand, models can be chosen for each sub-problem individually, hence the information captured by different kinds of models can be combined in the system.
 
-\item {\bf Multi-channel model for manipulating contextual information}. Sometimes we may not exactly understand what a person want to express or how he feels only through his written message. To deal with this problem, some of the text sentiment analysis researches take into account the contextual clues. Therefore, we propose a multi-channel model. By feeding contextual information that plays different parts of role into different feature encoders, features of different contextual clues are encoded and further combined with that of the main message to get the identification result.
+\item {\bf Multi-channel model for manipulating contextual information}. In some case we can hardly understand what a person want to express or how he feels only through his written message. To deal with this problem, some of the text sentiment analysis researches take into account the contextual clues. Therefore, we propose a multi-channel model. By feeding contextual information that plays different parts of role into different feature encoders, features of different contextual clues are encoded and further combined with that of the main message to get the identification result.
 
 \end{enumerate}
 
