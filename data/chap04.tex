@@ -225,28 +225,44 @@
 
 按照国际比赛SemEval-2018任务三的设置，各个子任务均以F1值作为系统识别性能的主要评价指标。对于其中一个类别$c$的F1值，其定义如下：
 
-\begin{align}
+\vspace{-10mm}
+\begin{equation}
+\vspace{-2.5mm}
+\begin{aligned}
   F_c = \frac{2 \times P_c \times R_c}{P_c + R_c} 
-\end{align}
+\end{aligned}
+\end{equation}
 
 其中 $P_c$ 为类别$c$的正确率，$R_c$ 为类别$c$的召回率，其定义如下：
 
-\begin{align}
+\vspace{-10mm}
+\begin{equation}
+\vspace{-2.5mm}
+\begin{aligned}
   P_c &= \frac{TP_c}{TP_c + FP_c} \\
   R_c &= \frac{TP_c}{TP_c + FN_c}
-\end{align} 
+\end{aligned}
+\end{equation}
 
 其中$TP_c$表示被系统预测为类别$c$，且真实标签为类别$c$的样本数量；$FP_c$表示被系统预测为类别$c$，但真实标签不是类别$c$的样本数量；$FN_c$表示被系统预测为不是类别$c$，但真实标签为类别$c$的样本数量。对于子任务一，系统性能以“带有反讽”一类样本的F1值为主要评估指标。对于子任务二，系统性能以各个类别的F1值的宏平均作为主要评价指标，即：
 
-\begin{align}
+\vspace{-10mm}
+\begin{equation}
+\vspace{-2.5mm}
+\begin{aligned}
   F_{macro} = \sum\limits_{c \in C}F_c
-\end{align}
+\end{aligned}
+\end{equation}
 
 此处$C$对应子任务二中四个类别组成的集合，即\{没有反讽，基于相反语义的反讽，情景反讽，其他反讽\}。在以下实验中，除了F1值、正确率和召回率，我们还会观察模型的准确率，其定义如下：
 
-\begin{align}
+\vspace{-10mm}
+\begin{equation}
+\vspace{-2.5mm}
+\begin{aligned}
   Acc &= \frac{\sum\limits_{c \in C} TP_c}{\sum\limits_{c \in C}(TP_c + FP_c)}
-\end{align}
+\end{aligned}
+\end{equation}
 
 其中$TP_c$和$FP_c$如前述的定义，而$C$在子任务一中对应两个类别组成的集合，即\{没有反讽，带有反讽\}。
 
@@ -273,10 +289,14 @@
 
 \end{itemize}
 
-\begin{align}
+\vspace{-10mm}
+\begin{equation}
+\vspace{-2.5mm}
+\begin{aligned}
     \label{eq:class_weight}
     w_c = \frac{N}{|C| \times N_c}
-\end{align}
+\end{aligned}
+\end{equation}
 
 \subsection{实验结果与分析}
 

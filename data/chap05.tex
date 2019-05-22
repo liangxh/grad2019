@@ -227,33 +227,26 @@
 
 按照国际比赛SemEval-2019任务三的设置，系统性能以针对“开心”、“悲伤”和“愤怒”三个情感类别的F1值（以下记为 $F_\mu$）作为识别系统性能的主要评价指标。其定义如下：
 
-\begin{align}
+\vspace{-10mm}
+\begin{equation}
+\vspace{-2.5mm}
+\begin{aligned}
   F_\mu &= \frac{2 \times P_\mu \times R_\mu}{P_\mu + R_\mu}
-\end{align}
+\end{aligned}
+\end{equation}
 
 其中 $P_\mu$ 和 $R_\mu$ 分别是针对“开心”、“悲伤”和“愤怒”三个情感类别的正确率和召回率，其定义如下：
 
-\begin{align}
+\vspace{-10mm}
+\begin{equation}
+\vspace{-2.5mm}
+\begin{aligned}
   P_\mu &= \frac{\sum\limits_{c \in C} TP_c}{\sum\limits_{c \in C}(TP_c + FP_c)} \\
   R_\mu &= \frac{\sum\limits_{c \in C} TP_c}{\sum\limits_{c \in C}(TP_c + FN_c)}
-\end{align}
+\end{aligned}
+\end{equation}
 
-其中 $C$对应情感类别集合\{开心，悲伤，愤怒\}，$TP_c$表示被系统预测为类别$c$，且真实标签为类别$c$的样本数量；$FP_c$表示被系统预测为类别$c$，但真实标签不是类别$c$的样本数量；$FN_c$被系统预测为不是类别$c$，但真实标签为类别$c$的样本数量。 
-
-%另外，原比赛虽然以 $F_\mu$ 为排名的主要指标，但比赛组织者同样关注各个情感类别的F1值，因此在以下实验结果分析中我们也会这些指示进行观察，从而以不同角度了解系统识别性能。各个情感类别的F1值定义如下：
-
-%\begin{align}
-%  F_c &= \frac{2 \times P_c \times R_c}{P_c + R_c}
-%\end{align}
-
-%其中 $P_c$ 为类别$c$的正确率，$R_c$ 为类别$c$的召回率，其定义如下：
-
-%\begin{align}
-%  P_c &= \frac{TP_c}{TP_c + FP_c} \\
-%  R_c &= \frac{TP_c}{TP_c + FN_c}
-%\end{align} 
-
-%其中$TP_c$，$FP_c$，$FN_c$的定义和前面的相同。
+其中 $C$对应情感类别集合\{开心，悲伤，愤怒\}，$TP_c$表示被系统预测为类别$c$，且真实标签为类别$c$的样本数量；$FP_c$表示被系统预测为类别$c$，但真实标签不是类别$c$的样本数量；$FN_c$被系统预测为不是类别$c$，但真实标签为类别$c$的样本数量。
 
 \subsection{模型训练}
 \label{ssec:exp_context_emo_model_training}

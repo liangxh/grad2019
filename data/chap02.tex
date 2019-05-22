@@ -178,24 +178,32 @@
 
 递归神经网络（Recurrent Neural Network，RNN）是另一个人工神经网络的大类，和前馈神经网络最大的区别在于递归神经网络中以某种机制实现了记忆能力来保留前一时刻的状态，因此可以对一个序列输入中前后出现的内容进行关联，换言之对序列的数据进行建模。递归神经网络会在每一时刻接受一个输入，并结合其“记忆”计算这一时刻的输出，故递归神经网络的输出是和输入序列长度相同的序列。递归神经网络的应用场景包括视频内容识别、文本翻译、股票指标预测等。较早期被提出的递归神经网络模型是Elman\cite{elman1990finding}的Elman网络，其数学模型如下：
 
-\begin{align}
+\vspace{-10mm}
+\begin{equation}
+\vspace{-2.5mm}
+\begin{aligned}
   \label{eq:elman_rnn}
   h_t &= \sigma_h (W_h x_t + U_h h_{t-1} + b_h) \\
   y_t &= \sigma_y (Y_y h_t + b_y)
-\end{align}
+\end{aligned}
+\end{equation}
 
 其中$x_t \in \mathbb{R}^d $为$t$时刻的输入，$h_t, h_{t-1} \in \mathbb{R}^h $分别表示网络在这一时刻和上一时刻的隐藏状态，$y_t \in \mathbb{R}^y$为网络的输出，$\sigma_h$和$\sigma_y$为激活函数，$W_h \in \mathbb{R}^{h \times d}, U_h \in \mathbb{R} ^ {h \times h}, b_h \in \mathbb{R}^h, Y_h \in \mathbb{R}^{y \times h}, b_y \in \mathbb{R}^y$为模型参数。可见在模型中因为引入$h_{t-1}$作为当前时刻的输入而表现出某种记忆，上一时刻的输入$x_{t-1}$间接影响了这一轮的输出。
 
 目前常用的递归神经网络之一是Hochreiter和Schmidhuber\cite{hochreiter1997long}提出的长短时记忆模型（Long Short-Term Memory，LSTM），其数学模型如下：
 
-\begin{align}
+\vspace{-10mm}
+\begin{equation}
+\vspace{-2.5mm}
+\begin{aligned}
   \label{eq:lstm}
   f_t &= \sigma_g(W_f x_t + U_f h_{t - 1} + b_f) \\
   i_t &= \sigma_g(W_i x_t + U_i h_{t - 1} + b_i) \\
   o_t &= \sigma_g(W_o x_t + U_o h_{t - 1} + b_o) \\
   c_t &= f_t \circ c_{t-1} + i_t \circ \sigma_c (W_c x_t + U_c h_{t-1} + b_c) \\
   h_t &= o_t \circ \sigma_h (c_t)
-\end{align}
+\end{aligned}
+\end{equation}
 
 其中$x_t \in \mathbb{R}^d$ 为$t$时刻的输入，$h_t$，$h_{t-1} \in \mathbb{R}^h$分别是这一时刻和上一时刻LSTM的输出（或当LSTM作为一个人工神经网络中其中一层时称为隐藏状态），$c_t \in \mathbb{R}^h$为当前时刻记忆，$i_t$，$f_t$，$o_t \in \mathbb{R}^h$分别控制了这一时刻的输入、上一时刻记忆和这一时刻的输出在这一刻起的作用，因此称为“输入门”、“遗忘门”、“输出门”的激活向量，$\sigma_g, \sigma_c, \sigma_h$为激活函数，特别地$\sigma_g$一般采用 $sigmoid$函数，$\sigma_c, \sigma_h$一般采用$tanh$函数，$W \in \mathbb{R} ^ {h \times d}, U \in \mathbb{R}^{h \times h}, b \in \mathbb{R} ^ {h}$为网络参数。和Elman网络比较可见，LSTM除了有$h_{t-1}$传递上一时刻的信息以外多了一个记忆单元$c$，具有更强的记忆功能。在LSTM的设计中包含了“输入门”、“遗忘门”、“输出门”和记忆单元，对序列数据有较强拟合能力，相对地对于小规模的序列数据容易出现过拟合。
 
@@ -208,12 +216,16 @@
 
 为了解决容现出现过拟合的问题，Cho等人\cite{cho2014learning}提出了门控循环神经元（Gated Recurrent Unit, GRU）。可以认为它是LSTM的一种轻量级变型，其数学模型如下：
 
-\begin{align}
+\vspace{-10mm}
+\begin{equation}
+\vspace{-2.5mm}
+\begin{aligned}
   \label{eq:gru}
   z_t &= \sigma_g (W_z x_t + U_z h_{t-1} + b_z) \\
   r_t &= \sigma_g (W_r x_t + U_r h_{t-1} + g_r) \\
   h_t &= (1 - z_t) \circ h_{t-1} + z_t \circ \sigma_h (W_h x_t + U_h (r_t \circ h_{t-1}) + b_h) 
-\end{align}
+\end{aligned}
+\end{equation}
 
 可见在数学模型上GRU和LSTM非常相似，虽然GRU中省去了专门的记忆单元，但同样采用了“门”来控制当前时刻的输入和前一时刻输出的作用。GRU的模型结构要较LSTM的简单，而在同一组超参数下，GRU的模型参数要明显少于LSTM，故理论上在处理较小规模的序列数据时更有优势。
 
@@ -228,21 +240,29 @@
 
 注意力机制（Attention Mechanism）受启发于人类的视觉处理机制，当人们尝试理解一个画面的内容时，他们不会马上对画面里的所有细节都进行处理，而是首先找出相关信息可能在的部位，再对该部分的内容作进一步处理。当人们对同类型画面有一定观察后，会总结出关键信息出现的模式，并在处理新的画面时优先采用这些模式来理解其中的内容。Mnih等人\cite{mnih2014recurrent}以此提出了结合递归神经网络和注意力机制来实现对手写数字的识别，不是透过预处理而是直接依赖注意力机制找出图片中数字所在的位置。其后Bahdanau等人\cite{bahdanau2014neural}同样尝试了在递归神经网络中加入注意力机制，但这次的应用场景从计算机视觉转移到了自然语言处理的机器翻译，其注意力机制的模型如下：
 
-\begin{align}
+\vspace{-10mm}
+\begin{equation}
+\vspace{-2.5mm}
+\begin{aligned}
   \label{eq:attention}
   e_{ij} &= a(s_{i - 1}, h_j) \\
   \alpha_{ij} &= \frac{exp(e_{ij})}{\sum\limits_{k=1}^{T_x}{exp(e_{ik})}} \\
   c_{i} &= \sum\limits_{j=1}^{T_x}{\alpha_{ij}h_j}
-\end{align}
+\end{aligned}
+\end{equation}
 
 其中$s_{i-1}$表示上一时刻（$i-1$）的隐藏状态，$h_j$表示在时刻$j$的输入信息，$a$是一个计算$s_{i - 1}$和$h_j$关联性的函数，$\alpha_{ij} \in (0, 1]$表示对输出时刻$i$，给予输入时刻$j$的信息的注意力，最后根据各个时刻应该给予的注意力结合所有输入信息，得出用于时刻$i$输出的相关信息$c_{i}$。其后Vaswani等人\cite{vaswani2017attention}针对机器翻译提出了一种仅基于注意力机制搭建的人工神经网络，实验结果显示他们的模型超越了该实验数据上曾达到过最好的性能。虽然在近年不同研究\cite{luong2015effective}\cite{graves2014neural}\cite{xu2015show}中同现了各种注意力机制的变型，但这些模型可以统一描述如下：
 
-\begin{align}
+\vspace{-10mm}
+\begin{equation}
+\vspace{-2.5mm}
+\begin{aligned}
   \alpha_{ij} &= a(q_i, k_j) \\
   c_i &= \frac
     {\sum\limits_{j=1}^{T_x}{\alpha_{ij}v_j}}
     {\sum\limits_{j=1}^{T_x}{\alpha_{ij}}}
-\end{align}
+\end{aligned}
+\end{equation}
 
 其中$q_i$表示输出时刻$i$对应的一个请求，$k_j$和$v_j$表示输入时刻$j$的一个键值对，$a$是计算请求和键之间关联性的函数，以得出对于输出时刻$i$应给予输入时刻$j$的信息$v_j$的注意力$\alpha_{ij}$，最后以加权平均计算出输出时刻$i$相关的信息$c_i$。一些研究\cite{wang2016attention}\cite{pontiki2014semeval}则针对其中的隐藏状态$\alpha_{ij}$分析注意力机制的具体运行，并得出了和人工理解一致的结果。
 
@@ -252,7 +272,9 @@
 集成学习（Ensemble Learning）的目的在于结合多个模型以达到比其中任何一个模型都要好的识别性能。集成学习方法包含了多个类别，其中常用于分类问题的是基于投票的方法，譬如多数投票（Majority Voting）、加权多数投票（Weighted Majority Vote）、加权平均概率投票（Soft Voting）。假设对于$N$分类问题，有$T$个基础模型$h^i, i = 1,2,...,T$。
 对于输入数据$x$，基础模型$h^i$的输出如下：
 
+\vspace{-10mm}
 \begin{equation}
+\vspace{-2.5mm}
   h^i_j(x) = 
   \begin{cases}
   1, & \mbox{若模型}h^i\mbox{将}x\mbox{识别为类别}j  \\
@@ -262,21 +284,33 @@
 
 对于多数投票，其最终预测结果$H_M(x)$如下：
 
-\begin{align}
+\vspace{-10mm}
+\begin{equation}
+\vspace{-2.5mm}
+\begin{aligned}
   H_{M}(x) &= \mathop{\arg\min}_{j} \sum\limits_{i=1}^{T}h^i_j(x)
-\end{align}
+\end{aligned}
+\end{equation}
 
 在章节~\ref{sssec:traditional_ml}中提到的随机森林就是以決策树为基础模型，再採用多数投票得出最终识別结果的算法。对于加权多数投票，其最终预测结果$H_{WM}(x)$如下：
 
-\begin{align}
+\vspace{-10mm}
+\begin{equation}
+\vspace{-2.5mm}
+\begin{aligned}
   H_{WM}(x) &= \mathop{\arg\min}_{j} \sum\limits_{i=1}^{T}w_i h^i_j(x)
-\end{align}
+\end{aligned}
+\end{equation}
 
 其中$\sum\limits_{i=1}^{T}w_i = 1, w_i \geq 0$为每个模型的权重，相当于假设不同模型具有不同的可信度。而加权平均概率投票要求模型能给出样本在不同类别上的概率分布$p^i(x) \in [0, 1]^N$，其最终预测结果$H_S(x)$如下：
 
-\begin{align}
+\vspace{-10mm}
+\begin{equation}
+\vspace{-2.5mm}
+\begin{aligned}
   H_{S}(x) &= \mathop{\arg\min}_{j} \sum\limits_{i=1}^{T}w_i p^i_j(x)
-\end{align}
+\end{aligned}
+\end{equation}
 
 其中$\sum\limits_{i=1}^{T}w_i = 1, w_i \geq 0$，和加权多数投票中$w_i$的原理相同。
 
