@@ -11,6 +11,10 @@ main.out
 main.thm
 main.toc
 
+shuji.thm
+shuji.out
+shuji.aux
+
 *.log
 .idea/
 data/*.aux
