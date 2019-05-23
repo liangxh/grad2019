@@ -190,6 +190,13 @@
 
 其中$x_t \in \mathbb{R}^d $为$t$时刻的输入，$h_t, h_{t-1} \in \mathbb{R}^h $分别表示网络在这一时刻和上一时刻的隐藏状态，$y_t \in \mathbb{R}^y$为网络的输出，$\sigma_h$和$\sigma_y$为激活函数，$W_h \in \mathbb{R}^{h \times d}, U_h \in \mathbb{R} ^ {h \times h}, b_h \in \mathbb{R}^h, Y_h \in \mathbb{R}^{y \times h}, b_y \in \mathbb{R}^y$为模型参数。可见在模型中因为引入$h_{t-1}$作为当前时刻的输入而表现出某种记忆，上一时刻的输入$x_{t-1}$间接影响了这一轮的输出。
 
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{img/lstm.png}
+  \caption{长短时记忆模型，引自\cite{graves2013hybrid}}
+  \label{fig:lstm}
+\end{figure}
+
 目前常用的递归神经网络之一是Hochreiter和Schmidhuber\cite{hochreiter1997long}提出的长短时记忆模型（Long Short-Term Memory，LSTM），其数学模型如下：
 
 \vspace{-10mm}
@@ -206,13 +213,6 @@
 \end{equation}
 
 其中$x_t \in \mathbb{R}^d$ 为$t$时刻的输入，$h_t$，$h_{t-1} \in \mathbb{R}^h$分别是这一时刻和上一时刻LSTM的输出（或当LSTM作为一个人工神经网络中其中一层时称为隐藏状态），$c_t \in \mathbb{R}^h$为当前时刻记忆，$i_t$，$f_t$，$o_t \in \mathbb{R}^h$分别控制了这一时刻的输入、上一时刻记忆和这一时刻的输出在这一刻起的作用，因此称为“输入门”、“遗忘门”、“输出门”的激活向量，$\sigma_g, \sigma_c, \sigma_h$为激活函数，特别地$\sigma_g$一般采用 $sigmoid$函数，$\sigma_c, \sigma_h$一般采用$tanh$函数，$W \in \mathbb{R} ^ {h \times d}, U \in \mathbb{R}^{h \times h}, b \in \mathbb{R} ^ {h}$为网络参数。和Elman网络比较可见，LSTM除了有$h_{t-1}$传递上一时刻的信息以外多了一个记忆单元$c$，具有更强的记忆功能。在LSTM的设计中包含了“输入门”、“遗忘门”、“输出门”和记忆单元，对序列数据有较强拟合能力，相对地对于小规模的序列数据容易出现过拟合。
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.7\textwidth]{img/lstm.png}
-  \caption{长短时记忆模型，引自\cite{graves2013hybrid}}
-  \label{fig:lstm}
-\end{figure}
 
 为了解决容现出现过拟合的问题，Cho等人\cite{cho2014learning}提出了门控循环神经元（Gated Recurrent Unit, GRU）。可以认为它是LSTM的一种轻量级变型，其数学模型如下：
 
@@ -292,7 +292,7 @@
 \end{aligned}
 \end{equation}
 
-在章节~\ref{sssec:traditional_ml}中提到的随机森林就是以決策树为基础模型，再採用多数投票得出最终识別结果的算法。对于加权多数投票，其最终预测结果$H_{WM}(x)$如下：
+在章节~\ref{sssec:traditional_ml}中提到的随机森林就是以决策树为基础模型，再采用多数投票得出最终识别结果的算法。对于加权多数投票，其最终预测结果$H_{WM}(x)$如下：
 
 \vspace{-10mm}
 \begin{equation}
