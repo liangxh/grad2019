@@ -839,7 +839,7 @@ FUNCTION {format.edition}
 FUNCTION {format.sine.loco}
 { is.in.chinese
     { "[出版地不详]" }
-    { "[S.l.]" }
+    { "" }
   if$
 }
 
@@ -849,7 +849,7 @@ FUNCTION {format.address}
 FUNCTION {format.sine.nomine}
 { is.in.chinese
     { "[出版者不详]" }
-    { "[s.n.]" }
+    { "" }
   if$
 }
 
@@ -875,7 +875,7 @@ FUNCTION {format.publisher}
 FUNCTION {format.sine.loco.sine.nomine}
 { is.in.chinese
     { "[出版地不详: 出版者不详]" }
-    { "[S.l.: s.n.]" }
+    { "" }
   if$
 }
 
